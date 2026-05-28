@@ -1,0 +1,9 @@
+{
+    "_DM_8pu5l2evu": {
+        "id": "_DM_8pu5l2evu",
+        "name": "loan",
+        "dbType": "dbModel",
+        "dbConfigId": "sd_Pela28njo43vGVh7",
+        "dbName": "postgres"
+    }
+}

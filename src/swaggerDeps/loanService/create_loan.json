@@ -1,0 +1,17 @@
+{
+    "/loan": {
+        "post": {
+            "summary": "Add new Loan Query if it's new",
+            "description": "Add new Loan Query if it's new",
+            "consumes": [
+                "application/json"
+            ],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "create_loan"
+            ]
+        }
+    }
+}

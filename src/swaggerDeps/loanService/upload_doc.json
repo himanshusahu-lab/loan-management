@@ -1,0 +1,15 @@
+{
+    "/media/upload": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "upload_doc"
+            ]
+        }
+    }
+}

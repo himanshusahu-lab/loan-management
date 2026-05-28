@@ -1,0 +1,15 @@
+{
+    "/loan/:applicationId": {
+        "get": {
+            "summary": "",
+            "description": "Dashboard Search Loan Application Details",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "getloandetails"
+            ]
+        }
+    }
+}

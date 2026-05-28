@@ -1,0 +1,15 @@
+{
+    "/interest-rate-slabs": {
+        "get": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "interest_rate_slabs"
+            ]
+        }
+    }
+}

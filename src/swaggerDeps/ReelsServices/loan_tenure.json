@@ -1,0 +1,15 @@
+{
+    "/loan-tenure": {
+        "get": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [],
+            "responses": {},
+            "tags": [
+                "loan_tenure"
+            ]
+        }
+    }
+}
