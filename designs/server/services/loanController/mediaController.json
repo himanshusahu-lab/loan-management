@@ -1,0 +1,153 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "type": "tab",
+        "createdDate": "2026-05-23T06:59:15.233Z",
+        "label": "mediaController",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "mediaController",
+        "relativeParentPath": "loanController"
+    },
+    {
+        "id": "sd_VMSB8u6HJpu2iG0d",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const uploadedFile =\n    bh.local.uploadedFile;\n\nif (!uploadedFile) {\n\n    bh.input.error = {\n\n        statusCode: 400,\n\n        message:\n            \"Uploaded file missing\"\n    };\n\n    throw new Error(\n        \"Uploaded file missing\"\n    );\n}\n\nconst fileName =\n    `${Date.now()}_${uploadedFile.originalname}`;\n\nconst filePath =\n    `./uploads/${fileName}`;\n\nbh.local.fileName =\n    fileName;\n\nbh.local.filePath =\n    filePath;\n\nbh.local.fileBuffer =\n    uploadedFile.buffer;\n\nconsole.log(\n    \"FILE NAME:\",\n    fileName\n);\n\nconsole.log(\n    \"FILE PATH:\",\n    filePath\n);",
+        "functionName": "sd_VMSB8u6HJpu2iG0d",
+        "category": "Function",
+        "x": 225,
+        "y": 140,
+        "wires": [
+            [
+                "sd_7QGAI6iGuanm0UPg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "mediaController",
+        "generated": true
+    },
+    {
+        "id": "sd_eE0VAEoiDUexhscg",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "formatResponse",
+        "script": "bh.output = {\n\n    success: true,\n\n    message:\n        \"File uploaded successfully\",\n\n    file_name:\n        bh.local.fileName,\n\n    file_path:\n        bh.local.filePath\n};\n",
+        "functionName": "formatResponse",
+        "category": "Function",
+        "x": 465,
+        "y": 140,
+        "wires": [
+            [
+                "sd_qmCGeMMdWsrNFdeP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "mediaController",
+        "generated": true
+    },
+    {
+        "id": "sd_7QGAI6iGuanm0UPg",
+        "type": "FileOut",
+        "z": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "saveLoanDocument",
+        "encoding": "utf8",
+        "outputs": 1,
+        "appendNewline": false,
+        "createDir": true,
+        "overwriteFile": false,
+        "isStreaming": false,
+        "filepath": {
+            "type": "bh.local",
+            "value": "filePath"
+        },
+        "resultMapping": {
+            "type": "bh.local",
+            "value": "fileBuffer"
+        },
+        "functionName": "saveLoanDocument",
+        "category": "File Operation",
+        "x": 345,
+        "y": 140,
+        "wires": [
+            [
+                "sd_eE0VAEoiDUexhscg"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "mediaController",
+        "generated": true
+    },
+    {
+        "id": "sd_qmCGeMMdWsrNFdeP",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.output",
+        "logLevel": "info",
+        "functionName": "sd_qmCGeMMdWsrNFdeP",
+        "category": "General",
+        "x": 605,
+        "y": 200,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh",
+                "value": "output",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "mediaController",
+        "generated": true
+    },
+    {
+        "id": "sd_qXhev291oGWiJdMr",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "Uploader",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "file",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [],
+        "accept_bh": false,
+        "functionName": "uploader",
+        "category": "General",
+        "x": 105,
+        "y": 200,
+        "wires": [
+            [
+                "sd_VMSB8u6HJpu2iG0d"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "mediaController"
+    }
+]

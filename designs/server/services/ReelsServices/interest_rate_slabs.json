@@ -1,0 +1,223 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_RO6suckLFqFSn75L",
+        "type": "tab",
+        "createdDate": "2026-05-27T06:53:19.316Z",
+        "label": "interest_rate_slabs",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "interest_rate_slabs",
+        "relativeParentPath": "ReelsServices"
+    },
+    {
+        "id": "sd_HOvClTeEPPRsuMFd",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_RO6suckLFqFSn75L",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/interest-rate-slabs",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 105,
+        "y": 100,
+        "wires": [
+            [
+                "sd_t99FtuTyr0FMameo"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "interest_rate_slabs",
+        "functionName": "sd_HOvClTeEPPRsuMFd"
+    },
+    {
+        "id": "sd_B9k5ZmXuUIg8AnQF",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_RO6suckLFqFSn75L",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res.payload",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res.payload",
+            "send": "bh.local.res.payload"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_B9k5ZmXuUIg8AnQF",
+        "category": "HTTP",
+        "x": 585,
+        "y": 100,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "interest_rate_slabs",
+        "generated": true
+    },
+    {
+        "id": "sd_XvTu7HgbToKzLOOB",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_RO6suckLFqFSn75L",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "method": "post",
+        "methodMappingObj": {},
+        "urlMapping": "\"https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/c84f0184-dfe5-423b-9da9-1f58adfd0448/5513f264-2e60-41b7-a44a-c1a206422024\"",
+        "urlMappingObj": {
+            "mapVarType": "str",
+            "mapVarValue": "https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/c84f0184-dfe5-423b-9da9-1f58adfd0448/5513f264-2e60-41b7-a44a-c1a206422024"
+        },
+        "ret": "json",
+        "retMappingObj": {},
+        "reqBody": "bh.local.payload",
+        "reqBodyObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "payload"
+        },
+        "resultMapping": "bh.local.res",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "res"
+        },
+        "headers": {
+            "token": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+        },
+        "headersObj": [
+            {
+                "key": "token",
+                "defaultValue": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+            }
+        ],
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMappingObj": {},
+        "useAuthTypeMappingObj": {},
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "sd_XvTu7HgbToKzLOOB",
+        "category": "HTTP",
+        "x": 405,
+        "y": 100,
+        "wires": [
+            [
+                "sd_B9k5ZmXuUIg8AnQF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "interest_rate_slabs",
+        "generated": true
+    },
+    {
+        "id": "sd_t99FtuTyr0FMameo",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_RO6suckLFqFSn75L",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.payload ={\n      \"pageNumber\": 0,\n  \"pageSize\": 10,\n  \"multiplicity\": \"multiple\",\n  \"filter\": {\n  }\n}",
+        "functionName": "sd_t99FtuTyr0FMameo",
+        "category": "Function",
+        "x": 245,
+        "y": 100,
+        "wires": [
+            [
+                "sd_XvTu7HgbToKzLOOB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "interest_rate_slabs",
+        "generated": true
+    }
+]

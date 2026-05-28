@@ -1,0 +1,231 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_fMRSO9WgtpSIfgNi",
+        "type": "tab",
+        "createdDate": "2026-05-27T06:55:36.889Z",
+        "label": "loan_tenure",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "loan_tenure",
+        "relativeParentPath": "ReelsServices"
+    },
+    {
+        "id": "sd_JlymKPudx1LSyIIO",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_fMRSO9WgtpSIfgNi",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/loan-tenure",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 85,
+        "y": 120,
+        "wires": [
+            [
+                "sd_Hs3zoVfW3WKXvi5D"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "loan_tenure",
+        "functionName": "sd_JlymKPudx1LSyIIO"
+    },
+    {
+        "id": "sd_MJ178z4IE1EFH0TD",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_fMRSO9WgtpSIfgNi",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res.payload",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res.payload",
+            "send": "bh.local.res.payload"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_MJ178z4IE1EFH0TD",
+        "category": "HTTP",
+        "x": 465,
+        "y": 120,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loan_tenure",
+        "generated": true
+    },
+    {
+        "id": "sd_IsynYnowAwnP4VbC",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_fMRSO9WgtpSIfgNi",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "method": "post",
+        "methodMapping": "",
+        "methodMappingObj": {},
+        "urlMapping": "\"https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/d70051e7-7296-424e-a1c7-21f73b1e1d48/468e159c-b6fb-41b8-b3d0-57843c5df97f\"",
+        "urlMappingObj": {
+            "mapVarType": "str",
+            "mapVarValue": "https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/d70051e7-7296-424e-a1c7-21f73b1e1d48/468e159c-b6fb-41b8-b3d0-57843c5df97f"
+        },
+        "ret": "json",
+        "retMapping": "",
+        "retMappingObj": {},
+        "reqBody": "bh.local.payload",
+        "reqBodyObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "payload"
+        },
+        "resultMapping": "bh.local.res",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "res"
+        },
+        "headers": {
+            "token": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+        },
+        "headersObj": [
+            {
+                "key": "token",
+                "defaultValue": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+            }
+        ],
+        "headerMapping": "",
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMapping": "",
+        "paramMappingObj": {},
+        "authType": "",
+        "useAuthTypeMappingObj": {},
+        "useAuthTypeMap": {},
+        "useAuthType": "",
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookies": [],
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "sd_IsynYnowAwnP4VbC",
+        "category": "HTTP",
+        "x": 325,
+        "y": 120,
+        "wires": [
+            [
+                "sd_MJ178z4IE1EFH0TD"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loan_tenure",
+        "generated": true
+    },
+    {
+        "id": "sd_Hs3zoVfW3WKXvi5D",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_fMRSO9WgtpSIfgNi",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.payload ={\n      \"pageNumber\": 0,\n  \"pageSize\": 10,\n  \"multiplicity\": \"multiple\",\n  \"filter\": {\n  }\n}",
+        "functionName": "sd_Hs3zoVfW3WKXvi5D",
+        "category": "Function",
+        "x": 185,
+        "y": 120,
+        "wires": [
+            [
+                "sd_IsynYnowAwnP4VbC"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loan_tenure",
+        "generated": true
+    }
+]

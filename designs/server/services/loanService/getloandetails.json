@@ -1,0 +1,477 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "type": "tab",
+        "createdDate": "2026-05-23T14:30:52.400Z",
+        "label": "getloandetails",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "getloandetails",
+        "relativeParentPath": "loanService"
+    },
+    {
+        "id": "sd_sdiV3Z3YyvG39mQy",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/loan/:applicationId",
+        "uploadpath": "",
+        "summary": "",
+        "description": "Dashboard Search Loan Application Details",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "uploadFileOptions": "",
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 65,
+        "y": 80,
+        "wires": [
+            [
+                "sd_lGEDpOnOeqs208R6"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "getloandetails",
+        "functionName": "sd_sdiV3Z3YyvG39mQy"
+    },
+    {
+        "id": "sd_7Ymf4qX1Cxju4xWK",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "output",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.output",
+            "send": "bh.output"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_7Ymf4qX1Cxju4xWK",
+        "category": "HTTP",
+        "x": 765,
+        "y": 20,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_lGEDpOnOeqs208R6",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "validateApplicationId",
+        "script": "let applicationId =\n    bh.input.params.applicationId;\n\nif (!applicationId) {\n\n    bh.input.error = {\n\n        statusCode: 400,\n\n        message:\n            \"Application ID is required\"\n    };\n\n    throw new Error(\n        \"Application ID is required\"\n    );\n}\n\nbh.local.applicationId =\n    applicationId;\n\nbh.local.filter = {\n    application_id: applicationId\n};",
+        "functionName": "validateApplicationId",
+        "category": "Function",
+        "x": 205,
+        "y": 80,
+        "wires": [
+            [
+                "sd_O3AMe6j15RfasKYX"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_O3AMe6j15RfasKYX",
+        "type": "find",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_8pu5l2evu",
+        "entityId": "_EN_u6exdr1rwe",
+        "_UI_entityName": "loan_applications",
+        "dbConfigId": "sd_Pela28njo43vGVh7",
+        "primayKey": "id",
+        "operationType": "find",
+        "_ID": "bh.local.application_id",
+        "filterBy": "bh.local.filter",
+        "offSet": "bh",
+        "orderBy": "bh",
+        "pageSize": "bh",
+        "resultMapping": "bh.local.loanResult",
+        "functionName": "sd_O3AMe6j15RfasKYX",
+        "category": "Data Model",
+        "x": 325,
+        "y": 80,
+        "wires": [
+            [
+                "sd_y4VfgTz2RJerKhXd"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "_ID": {
+                "type": "bh.local",
+                "value": "application_id",
+                "constant": false
+            },
+            "filterBy": {
+                "type": "bh.local",
+                "value": "filter",
+                "constant": false
+            },
+            "offSet": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "orderBy": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "pageSize": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "loanResult",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "_ID": true
+        },
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_V6YwFeKUWV5cIpuD",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "detailResponse",
+        "script": "bh.output = {\n\n    success: true,\n\n    data:\n        bh.local.loanResult\n};",
+        "functionName": "detailResponse",
+        "category": "Function",
+        "x": 665,
+        "y": 20,
+        "wires": [
+            [
+                "sd_7Ymf4qX1Cxju4xWK"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_r5I7kjz5QdYfzdFV",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "property": "loanResult.id",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.loanResult.id",
+        "rules": [
+            {
+                "t": "neq",
+                "v": "null",
+                "vt": "literal",
+                "gv": "null"
+            },
+            {
+                "t": "eq",
+                "v": "null",
+                "vt": "literal",
+                "gv": "null"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "sd_r5I7kjz5QdYfzdFV",
+        "category": "Function",
+        "x": 525,
+        "y": 80,
+        "wires": [
+            [
+                "sd_V6YwFeKUWV5cIpuD"
+            ],
+            [
+                "sd_y57QN9Opr6HgQ5rQ"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_y57QN9Opr6HgQ5rQ",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "detailNotFound",
+        "script": "bh.output = {\n\n    success: false,\n\n    statusCode: 404,\n\n    message:\n        \"Loan application not found\"\n};",
+        "functionName": "detailNotFound",
+        "category": "Function",
+        "x": 665,
+        "y": 160,
+        "wires": [
+            [
+                "sd_avCrAbxiFKXsRy7W"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_avCrAbxiFKXsRy7W",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "output",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 404,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 404,
+            "obj": "bh.output",
+            "send": "bh.output"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_avCrAbxiFKXsRy7W",
+        "category": "HTTP",
+        "x": 765,
+        "y": 160,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_1UqB1mYvdbtS5Ly1",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "Try-catch",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_wYoIZbWUGbDfaGEP",
+            "sd_w5Xg9CruGeOHNf9v"
+        ],
+        "functionName": "tryCatch",
+        "category": "General",
+        "x": 65,
+        "y": 240,
+        "wires": [
+            [
+                "sd_wYoIZbWUGbDfaGEP"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "getloandetails"
+    },
+    {
+        "id": "sd_w5Xg9CruGeOHNf9v",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "output",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 400,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 400,
+            "obj": "bh.output",
+            "send": "bh.output"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_w5Xg9CruGeOHNf9v",
+        "category": "HTTP",
+        "x": 300,
+        "y": 240,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_wYoIZbWUGbDfaGEP",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.output = {\n\n    success: false,\n\n    statusCode:\n        bh.input.error?.statusCode || 500,\n\n    message:\n        bh.input.error?.message\n        || \"Something went wrong\"\n};\n",
+        "functionName": "sd_wYoIZbWUGbDfaGEP",
+        "category": "Function",
+        "x": 185,
+        "y": 240,
+        "wires": [
+            [
+                "sd_w5Xg9CruGeOHNf9v"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    },
+    {
+        "id": "sd_y4VfgTz2RJerKhXd",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_2xfPryNX3hKg7HN1",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.loanResult =\n    bh.local.loanResult?.[0] || 'null';\n\n    console.log(\"bh.local.loanResult >>> \", bh.local.loanResult)\n",
+        "functionName": "sd_y4VfgTz2RJerKhXd",
+        "category": "Function",
+        "x": 425,
+        "y": 80,
+        "wires": [
+            [
+                "sd_r5I7kjz5QdYfzdFV"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "getloandetails",
+        "generated": true
+    }
+]

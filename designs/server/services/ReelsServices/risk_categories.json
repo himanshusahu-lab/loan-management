@@ -1,0 +1,223 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX",
+        "type": "tab",
+        "createdDate": "2026-05-27T07:01:05.568Z",
+        "label": "risk_categories",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "risk_categories",
+        "relativeParentPath": "ReelsServices"
+    },
+    {
+        "id": "sd_kg6SzN1bbaBRdFms",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/risk-categories",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 105,
+        "y": 100,
+        "wires": [
+            [
+                "sd_xoWRPtDhVNxwvTru"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "risk_categories",
+        "functionName": "sd_kg6SzN1bbaBRdFms"
+    },
+    {
+        "id": "sd_hM03qqXaP3xyyMm5",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res.payload",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res.payload",
+            "send": "bh.local.res.payload"
+        },
+        "dataModelIsArray": false,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_hM03qqXaP3xyyMm5",
+        "category": "HTTP",
+        "x": 585,
+        "y": 100,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "risk_categories",
+        "generated": true
+    },
+    {
+        "id": "sd_bFV2o8oMVIwnCKpL",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "method": "post",
+        "methodMappingObj": {},
+        "urlMapping": "\"https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/f5c80599-8a2e-4de6-8835-433c98fd2d1f/c9ed18e3-965a-4c70-8211-3b163a775aca\"",
+        "urlMappingObj": {
+            "mapVarType": "str",
+            "mapVarValue": "https://reels-pt.neutrinos-apps.com/integration/api/records/filter/72b58c39-817f-4204-95dc-4f5eec8fd929/f5c80599-8a2e-4de6-8835-433c98fd2d1f/c9ed18e3-965a-4c70-8211-3b163a775aca"
+        },
+        "ret": "json",
+        "retMappingObj": {},
+        "reqBody": "bh.local.payload",
+        "reqBodyObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "payload"
+        },
+        "resultMapping": "bh.local.res",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "res"
+        },
+        "headers": {
+            "token": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+        },
+        "headersObj": [
+            {
+                "key": "token",
+                "defaultValue": "7cca0b42-7572-40f3-bac6-50800d0e6bed.49cbb32a7d900babcf7ed244aba0ade5d407cefde47bd4bab471d80ea0988546"
+            }
+        ],
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMappingObj": {},
+        "useAuthTypeMappingObj": {},
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "sd_bFV2o8oMVIwnCKpL",
+        "category": "HTTP",
+        "x": 405,
+        "y": 100,
+        "wires": [
+            [
+                "sd_hM03qqXaP3xyyMm5"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "risk_categories",
+        "generated": true
+    },
+    {
+        "id": "sd_xoWRPtDhVNxwvTru",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.payload ={\n      \"pageNumber\": 0,\n  \"pageSize\": 10,\n  \"multiplicity\": \"multiple\",\n  \"filter\": {\n  }\n}",
+        "functionName": "sd_xoWRPtDhVNxwvTru",
+        "category": "Function",
+        "x": 245,
+        "y": 100,
+        "wires": [
+            [
+                "sd_bFV2o8oMVIwnCKpL"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "risk_categories",
+        "generated": true
+    }
+]

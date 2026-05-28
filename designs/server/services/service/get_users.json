@@ -1,0 +1,413 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "type": "tab",
+        "createdDate": "2026-05-21T07:10:52.381Z",
+        "label": "get_users",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "get_users",
+        "relativeParentPath": "service"
+    },
+    {
+        "id": "sd_akljFPxZcZwwiDSM",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "getUsers",
+        "path": "/books",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "get",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "limit",
+                    "desc": "Number of items to return per page",
+                    "type": "query",
+                    "required": false,
+                    "rowId": "sd_dTX2XfbA7P5StaRX",
+                    "valid": true
+                },
+                {
+                    "key": "offset",
+                    "desc": "Number of items to skip",
+                    "type": "query",
+                    "required": false,
+                    "rowId": "sd_YhjBAThFZLHIfuX1",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_6ZPT6JVVNZHqQYhS",
+                    "valid": true
+                }
+            ]
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 45,
+        "y": 80,
+        "wires": [
+            [
+                "sd_i1hos4tPEawidmLK"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "get_users",
+        "functionName": "sd_akljFPxZcZwwiDSM"
+    },
+    {
+        "id": "sd_i1hos4tPEawidmLK",
+        "type": "Async",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "client-server",
+        "nodeType": "flow",
+        "name": "",
+        "flowNodes": [
+            {
+                "serviceId": "SSD_SERVICE_ID_sd_CPCR8RZsoxa3L0qw",
+                "serviceName": "controller",
+                "flowId": "sd_lVQP54bv3CB4xdIP",
+                "functionName": "getBooksController",
+                "inputParams": [
+                    "bh.input.query.limit",
+                    "bh.input.query.offset"
+                ],
+                "inputVariables": [
+                    {
+                        "key": "limit",
+                        "map": true,
+                        "valueType": "bh.input",
+                        "value": "query.limit"
+                    },
+                    {
+                        "key": "offset",
+                        "map": true,
+                        "valueType": "bh.input",
+                        "value": "query.offset"
+                    }
+                ],
+                "accept_bh": false,
+                "randomVal": 433093,
+                "relativePath": null
+            }
+        ],
+        "_flowNodes": [
+            {
+                "serviceId": "SSD_SERVICE_ID_sd_CPCR8RZsoxa3L0qw",
+                "serviceName": "controller",
+                "flowId": "sd_lVQP54bv3CB4xdIP",
+                "functionName": "getBooksController",
+                "inputParams": [
+                    "bh.input.query.limit",
+                    "bh.input.query.offset"
+                ],
+                "inputVariables": [
+                    {
+                        "key": "limit",
+                        "map": true,
+                        "valueType": "bh.input",
+                        "value": "query.limit"
+                    },
+                    {
+                        "key": "offset",
+                        "map": true,
+                        "valueType": "bh.input",
+                        "value": "query.offset"
+                    }
+                ],
+                "accept_bh": false,
+                "randomVal": 433093,
+                "relativePath": null
+            }
+        ],
+        "resultMapping": "bh.local.result",
+        "isValidNode": true,
+        "functionName": "sd_i1hos4tPEawidmLK",
+        "category": "Function",
+        "x": 145,
+        "y": 80,
+        "wires": [
+            [
+                "sd_I7qzPBRrbiQC8Nby"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_users",
+        "generated": true
+    },
+    {
+        "id": "sd_I7qzPBRrbiQC8Nby",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(bh.local.result)\n if(bh.local.result){\n        bh.local.res = {\n            statusCode : 200,\n            resMessage : \"A paginated list of books\",\n            result :bh.local.result[0].local.result\n        }\n    }else{\n         bh.local.res = {\n            statusCode : 500,\n            resMessage : \"Something Went Wrong!\"\n        }\n    }\n",
+        "functionName": "sd_I7qzPBRrbiQC8Nby",
+        "category": "Function",
+        "x": 245,
+        "y": 80,
+        "wires": [
+            [
+                "sd_zKVK2iOgRcY5enP5",
+                "sd_Cc8S4rKO4anXvciF"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_users",
+        "generated": true
+    },
+    {
+        "id": "sd_zKVK2iOgRcY5enP5",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "getBooksOut",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "res.result",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.res.result",
+            "send": "bh.local.res.result"
+        },
+        "dataModelIsArray": true,
+        "cookies": [],
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "_DM_gnk9mm5zi",
+        "entity": "books",
+        "entityId": "_EN_cwhafk0pb6",
+        "ref": "#/definitions/books ~ books",
+        "editableListData": {
+            "headers": [],
+            "produces": [
+                {
+                    "key": "application/json",
+                    "rowId": "sd_xTfiM6rkoNeLI89d",
+                    "valid": true
+                }
+            ],
+            "responses": [
+                {
+                    "key": "A paginated list of books",
+                    "value": "200",
+                    "rowId": "sd_lHNuJbQTdj9MMUVr",
+                    "valid": true
+                },
+                {
+                    "key": "\"Something Went Wrong\"",
+                    "value": "500",
+                    "rowId": "sd_loWUXC1zOM3zljKG",
+                    "valid": true
+                }
+            ]
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "getBooksOut",
+        "category": "HTTP",
+        "x": 665,
+        "y": 80,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_users",
+        "generated": true
+    },
+    {
+        "id": "sd_8PR3hnC3K9e3jvJB",
+        "type": "Async",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "client-server",
+        "nodeType": "flow",
+        "name": "",
+        "flowNodes": [
+            {
+                "serviceId": "SSD_SERVICE_ID_sd_CPCR8RZsoxa3L0qw",
+                "serviceName": "controller",
+                "flowId": "sd_BwqXuXeP1MhXq6Md",
+                "flowName": "sendDataForAuditing",
+                "functionName": "sendDataForAuditing",
+                "inputParams": [
+                    "bh.local.req.operation",
+                    "bh.local.req.resourceid",
+                    "bh.local.req.userid",
+                    "bh.local.req.timestamp"
+                ],
+                "inputVariables": [
+                    {
+                        "key": "operation",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.operation"
+                    },
+                    {
+                        "key": "resourceid",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.resourceid"
+                    },
+                    {
+                        "key": "userid",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.userid"
+                    },
+                    {
+                        "key": "timestamp",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.timestamp"
+                    }
+                ],
+                "accept_bh": false,
+                "randomVal": 313845,
+                "relativePath": null
+            }
+        ],
+        "_flowNodes": [
+            {
+                "serviceId": "SSD_SERVICE_ID_sd_CPCR8RZsoxa3L0qw",
+                "serviceName": "controller",
+                "flowId": "sd_BwqXuXeP1MhXq6Md",
+                "flowName": "sendDataForAuditing",
+                "functionName": "sendDataForAuditing",
+                "inputParams": [
+                    "bh.local.req.operation",
+                    "bh.local.req.resourceid",
+                    "bh.local.req.userid",
+                    "bh.local.req.timestamp"
+                ],
+                "inputVariables": [
+                    {
+                        "key": "operation",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.operation"
+                    },
+                    {
+                        "key": "resourceid",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.resourceid"
+                    },
+                    {
+                        "key": "userid",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.userid"
+                    },
+                    {
+                        "key": "timestamp",
+                        "map": true,
+                        "valueType": "bh.local",
+                        "value": "req.timestamp"
+                    }
+                ],
+                "accept_bh": false,
+                "randomVal": 313845,
+                "relativePath": null
+            }
+        ],
+        "resultMapping": "bh.res",
+        "isValidNode": true,
+        "functionName": "sd_8PR3hnC3K9e3jvJB",
+        "category": "Function",
+        "x": 525,
+        "y": 160,
+        "wires": [
+            []
+        ],
+        "__ssdTypeInputs__": {
+            "resultMapping": {
+                "type": "bh",
+                "value": "res",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_users",
+        "generated": true
+    },
+    {
+        "id": "sd_Cc8S4rKO4anXvciF",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.req = {\n  operation: \"READ_BOOK\",\n  resourceid: \"NA\",\n  userid: \"C101\",\n  timestamp: new Date().toISOString()\n}\n\nconsole.log('audit payload', bh.local.req)",
+        "functionName": "sd_Cc8S4rKO4anXvciF",
+        "category": "Function",
+        "x": 365,
+        "y": 140,
+        "wires": [
+            [
+                "sd_8PR3hnC3K9e3jvJB"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "get_users",
+        "generated": true
+    }
+]

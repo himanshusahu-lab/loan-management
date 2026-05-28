@@ -1,0 +1,194 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "type": "tab",
+        "createdDate": "2026-05-22T06:47:40.514Z",
+        "label": "loanExistController",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "loanExistController",
+        "relativeParentPath": "loanController"
+    },
+    {
+        "id": "sd_mCAvqJJYUECJ26Nj",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "loanExsitsController",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "id",
+                "defaultValue": {
+                    "type": "num",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "loanExsitsController",
+        "category": "General",
+        "x": 105,
+        "y": 120,
+        "wires": [
+            [
+                "sd_BEuX2d4xkNslH7Aw"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "loanExistController"
+    },
+    {
+        "id": "sd_RtfcrdrN3U4znqLh",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.local.result1",
+        "logLevel": "info",
+        "functionName": "sd_RtfcrdrN3U4znqLh",
+        "category": "General",
+        "x": 505,
+        "y": 120,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh.local",
+                "value": "result1",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loanExistController",
+        "generated": true
+    },
+    {
+        "id": "sd_BEuX2d4xkNslH7Aw",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "bh.local.filter = {id : bh.input.id}",
+        "functionName": "sd_BEuX2d4xkNslH7Aw",
+        "category": "Function",
+        "x": 205,
+        "y": 120,
+        "wires": [
+            [
+                "sd_uhHDhGzmGrWP3PPz"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loanExistController",
+        "generated": true
+    },
+    {
+        "id": "sd_uhHDhGzmGrWP3PPz",
+        "type": "find",
+        "z": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "checkLoanExists",
+        "erd": "_DM_8pu5l2evu",
+        "entityId": "_EN_u6exdr1rwe",
+        "_UI_entityName": "loan_applications",
+        "dbConfigId": "sd_Pela28njo43vGVh7",
+        "primayKey": "id",
+        "operationType": "find",
+        "_ID": "bh",
+        "filterBy": "bh.local.filter.id",
+        "offSet": "bh",
+        "orderBy": "bh",
+        "pageSize": "bh",
+        "resultMapping": "bh.local.bookData",
+        "functionName": "checkLoanExists",
+        "category": "Data Model",
+        "x": 305,
+        "y": 120,
+        "wires": [
+            [
+                "sd_3BJU48Uqq78KQfbV"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "_ID": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "filterBy": {
+                "type": "bh.local",
+                "value": "filter.id",
+                "constant": false
+            },
+            "offSet": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "orderBy": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "pageSize": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "bookData",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "_ID": true
+        },
+        "generateNext": false,
+        "serviceName": "loanExistController",
+        "generated": true
+    },
+    {
+        "id": "sd_3BJU48Uqq78KQfbV",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "if (bh.local.bookData && bh.local.bookData.length > 0) {\n    bh.local.result = { \"exists\": true };\n    bh.local.statusCode = 200\n} else {\n    bh.local.result = { \"exists\": false };\n    bh.local.statusCode = 404\n}\n",
+        "functionName": "sd_3BJU48Uqq78KQfbV",
+        "category": "Function",
+        "x": 405,
+        "y": 120,
+        "wires": [
+            [
+                "sd_RtfcrdrN3U4znqLh"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "loanExistController",
+        "generated": true
+    }
+]

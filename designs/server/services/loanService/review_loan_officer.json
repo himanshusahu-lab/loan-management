@@ -1,0 +1,513 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "type": "tab",
+        "createdDate": "2026-05-23T14:19:17.760Z",
+        "label": "review_loan_officer",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "review_loan_officer",
+        "relativeParentPath": "loanService"
+    },
+    {
+        "id": "sd_623jg8L4zvp6f3r7",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "",
+        "path": "/loan/officer-review/:id",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 85,
+        "y": 160,
+        "wires": [
+            [
+                "sd_K0hXXQQGiBAxC52c"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "review_loan_officer",
+        "functionName": "sd_623jg8L4zvp6f3r7"
+    },
+    {
+        "id": "sd_x5PQMHzw8SnrWDY3",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "output",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.output",
+            "send": "bh.output"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_x5PQMHzw8SnrWDY3",
+        "category": "HTTP",
+        "x": 1025,
+        "y": 160,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_K0hXXQQGiBAxC52c",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "validateRequest",
+        "script": "let loanId =\n    bh.input.params.id;\n\nlet body =\n    bh.input.body;\n\nif (!loanId) {\n\n    throw {\n        statusCode: 400,\n        message: \"Loan ID required\"\n    };\n}\n\nif (!body.action) {\n\n    throw {\n        statusCode: 400,\n        message: \"Action required\"\n    };\n}\n\nbh.local.loanId =\n    Number(loanId);\n\nbh.local.body =\n    body;",
+        "functionName": "validateRequest",
+        "category": "Function",
+        "x": 205,
+        "y": 160,
+        "wires": [
+            [
+                "sd_BQ1cbgLQCxvL6Ztq"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_eq4yOV8QLzo93DgE",
+        "type": "Catch",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "start",
+        "name": "Try-catch",
+        "selectedNodes": "all-nodes",
+        "selectCatchType": "allnodes",
+        "masternodeList": "",
+        "ignoreList": [
+            "sd_ZacwT0T8ZbQ8s8Kt",
+            "sd_J8tcRX6cHu1Ljrgl"
+        ],
+        "functionName": "tryCatch",
+        "category": "General",
+        "x": 65,
+        "y": 320,
+        "wires": [
+            [
+                "sd_ZacwT0T8ZbQ8s8Kt"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "review_loan_officer"
+    },
+    {
+        "id": "sd_J8tcRX6cHu1Ljrgl",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "headers": {},
+        "responseBody": {
+            "type": "bh",
+            "value": "output",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "bh",
+            "value": "output.statusCode",
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": "bh.output.statusCode",
+            "obj": "bh.output",
+            "send": "bh.output"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "sd_J8tcRX6cHu1Ljrgl",
+        "category": "HTTP",
+        "x": 300,
+        "y": 320,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_ZacwT0T8ZbQ8s8Kt",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "let error =\n    bh.error || {};\n\nbh.output = {\n\n    success: false,\n\n    statusCode:\n        error.statusCode || 500,\n\n    message:\n        error.message ||\n        \"Something went wrong\"\n};\n\nconsole.log(\"bh.output >>>> \", bh.output)",
+        "functionName": "sd_ZacwT0T8ZbQ8s8Kt",
+        "category": "Function",
+        "x": 185,
+        "y": 320,
+        "wires": [
+            [
+                "sd_J8tcRX6cHu1Ljrgl"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_T5C6GYMj35d9wZow",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "validateLoanStatus",
+        "script": "let loan =\n    bh.local.loanData[0];\n\nif (!loan) {\n\n    throw {\n        statusCode: 404,\n        message: \"Loan not found\"\n    };\n}\nconsole.log(\"loan >>>> \", loan)\n\nif (\n    loan.status !==\n    \"SUBMITTED\"\n) {\n\n    throw {\n        statusCode: 400,\n        message:\n            \"Loan is not in submitted state\"\n    };\n}",
+        "functionName": "validateLoanStatus",
+        "category": "Function",
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "sd_d6Mq7tguKlCbDhXe"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_d6Mq7tguKlCbDhXe",
+        "type": "Switch",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "reviewDecision",
+        "property": "body.action",
+        "propertyType": "bh.local",
+        "propertyGv": "bh.local.body.action",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "FORWARD",
+                "vt": "str",
+                "gv": "\"FORWARD\""
+            },
+            {
+                "t": "eq",
+                "v": "REJECT",
+                "vt": "str",
+                "gv": "\"REJECT\""
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "functionName": "reviewDecision",
+        "category": "Function",
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "sd_DBeLXXmhzmYs8e4v"
+            ],
+            [
+                "sd_Dh3hyvpwm6MhHSun"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_DBeLXXmhzmYs8e4v",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "prepareForwardData",
+        "script": "bh.local.updateData = {\n\n    status:\n        \"CREDIT_MANAGER_REVIEW\",\n\n    remarks:\n        bh.local.body.remarks ||\n\n        \"Verified by Loan Officer\",\n\n    updated_at:\n        new Date()\n};\n\nconsole.log(\n    \"UPDATE DATA >>>>\",\n    bh.local.updateData\n);",
+        "functionName": "prepareForwardData",
+        "category": "Function",
+        "x": 645,
+        "y": 80,
+        "wires": [
+            [
+                "sd_Uk9RsT7sVXJJoZd8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_Dh3hyvpwm6MhHSun",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "prepareRejectData",
+        "script": "bh.local.updateData = {\n\n    status:\n        \"REJECTED\",\n\n    rejection_reason:\n        bh.local.body.remarks ||\n\n        \"Rejected by Loan Officer\",\n\n    remarks:\n        bh.local.body.remarks ||\n\n        \"Rejected by Loan Officer\",\n\n    rejected_at:\n        new Date(),\n\n    updated_at:\n        new Date()\n};\n\nconsole.log(\"bh.local.updateData >> \", bh.local.updateData)",
+        "functionName": "prepareRejectData",
+        "category": "Function",
+        "x": 645,
+        "y": 240,
+        "wires": [
+            [
+                "sd_Uk9RsT7sVXJJoZd8"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_r4dP1SJdaPJ7dxle",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "formatResponse",
+        "script": "bh.output = {\n\n    success: true,\n\n    message:\n        \"Loan review completed successfully\",\n\n    status:\n        bh.local.updateData.status\n};",
+        "functionName": "formatResponse",
+        "category": "Function",
+        "x": 925,
+        "y": 160,
+        "wires": [
+            [
+                "sd_x5PQMHzw8SnrWDY3"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_BQ1cbgLQCxvL6Ztq",
+        "type": "find",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_8pu5l2evu",
+        "entityId": "_EN_u6exdr1rwe",
+        "_UI_entityName": "loan_applications",
+        "dbConfigId": "sd_Pela28njo43vGVh7",
+        "primayKey": "id",
+        "operationType": "find",
+        "_ID": "bh",
+        "filterBy": "{    id: bh.local.loanId }",
+        "offSet": "bh",
+        "orderBy": "bh",
+        "pageSize": "bh",
+        "resultMapping": "bh.local.loanData",
+        "functionName": "sd_BQ1cbgLQCxvL6Ztq",
+        "category": "Data Model",
+        "x": 305,
+        "y": 160,
+        "wires": [
+            [
+                "sd_T5C6GYMj35d9wZow"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "_ID": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "filterBy": {
+                "type": "literal",
+                "value": "{    id: bh.local.loanId }",
+                "constant": false
+            },
+            "offSet": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "orderBy": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "pageSize": {
+                "type": "bh",
+                "value": "",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh.local",
+                "value": "loanData",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {
+            "_ID": true
+        },
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_HctUSdY3ivr0dLbS",
+        "type": "update",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "erd": "_DM_8pu5l2evu",
+        "entityId": "_EN_u6exdr1rwe",
+        "_UI_entityName": "loan_applications",
+        "dbConfigId": "sd_Pela28njo43vGVh7",
+        "operationType": "update",
+        "filterBy": "{    id: bh.local.loanId }",
+        "updateObject": "bh.local.updateData",
+        "resultMapping": "bh.updateResult",
+        "functionName": "sd_HctUSdY3ivr0dLbS",
+        "category": "Data Model",
+        "x": 845,
+        "y": 160,
+        "wires": [
+            [
+                "sd_r4dP1SJdaPJ7dxle"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "filterBy": {
+                "type": "literal",
+                "value": "{    id: bh.local.loanId }",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            },
+            "updateObject": {
+                "type": "literal",
+                "value": "bh.local.updateData",
+                "constant": false
+            },
+            "resultMapping": {
+                "type": "bh",
+                "value": "updateResult",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    },
+    {
+        "id": "sd_Uk9RsT7sVXJJoZd8",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_G5o1SNg7d1KH50kS",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "console.log(\n   \"loanId >>>\",\n   bh.local.loanId\n);\n\nconsole.log(\n   \"updateData >>>\",\n   bh.local.updateData\n);",
+        "functionName": "sd_Uk9RsT7sVXJJoZd8",
+        "category": "Function",
+        "x": 765,
+        "y": 160,
+        "wires": [
+            [
+                "sd_HctUSdY3ivr0dLbS"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "review_loan_officer",
+        "generated": true
+    }
+]
