@@ -31,8 +31,6 @@ import { create_loan as SSD_SERVICE_ID_sd_KG0qewBWvAr9C52R } from './sd-services
 import { idsutil as sd_3dqpkj044fxfDxYu } from './sd-services/idsutil';
 //CORE_REFERENCE_IMPORT-ids-sd_LRum6OapYNAIawtM
 import { ids as sd_LRum6OapYNAIawtM } from './sd-services/ids';
-//CORE_REFERENCE_IMPORT-get_users-SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy
-import { get_users as SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy } from './sd-services/service/get_users';
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
@@ -68,6 +66,4 @@ SSD_SERVICE_ID_sd_KG0qewBWvAr9C52R,
 sd_3dqpkj044fxfDxYu,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-ids-sd_LRum6OapYNAIawtM
 sd_LRum6OapYNAIawtM,
-//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-get_users-SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy
-SSD_SERVICE_ID_sd_cZ8EkC8FEsqDPbuy,
 ];
