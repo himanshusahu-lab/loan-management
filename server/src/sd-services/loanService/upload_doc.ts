@@ -130,15 +130,13 @@ export class upload_doc {
       'validateRequest',
       parentSpanInst
     );
-
     try {
-      const uploadedFile = bh.input?.files?.file?.[0];
-
-      console.log('REQ FILES >>> ', uploadedFile, bh.input.req?.files, bh.input);
+      const uploadedFile = bh.input.files?.[0];
 
       if (!uploadedFile) {
         bh.input.error = {
           statusCode: 400,
+
           message: 'File is required',
         };
 
@@ -147,12 +145,10 @@ export class upload_doc {
 
       bh.local.uploadedFile = uploadedFile;
 
-      console.log('Uploaded File >>> ', uploadedFile);
-
+      console.log('Uploaded File: >>>>>>>>>>>>>>> ', uploadedFile);
       this.tracerService.sendData(spanInst, bh);
-
       bh = await this.callUploaderService(bh, parentSpanInst);
-
+      //appendnew_next_validateRequest
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -170,23 +166,18 @@ export class upload_doc {
       'callUploaderService',
       parentSpanInst
     );
-
     try {
       const SSD_SERVICE_ID_sd_tcVkMN53BjepuYrDInstance: SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD.mediaController =
         SSD_SERVICE_ID_sd_tcVkMN53BjepuYrD.mediaController.getInstance();
-
       let outputVariables =
         await SSD_SERVICE_ID_sd_tcVkMN53BjepuYrDInstance.uploader(
           spanInst,
           bh.local.uploadedFile
         );
 
-      bh.local.uploadResult = outputVariables;
-
       this.tracerService.sendData(spanInst, bh);
-
       bh = await this.formatResponse(bh, parentSpanInst);
-
+      //appendnew_next_callUploaderService
       return bh;
     } catch (e) {
       return await this.errorHandler(
@@ -198,6 +189,7 @@ export class upload_doc {
       );
     }
   }
+
   async formatResponse(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
       'formatResponse',
@@ -242,18 +234,19 @@ export class upload_doc {
       'sd_jivdFNE9Jxw93Xj6',
       parentSpanInst
     );
-
     try {
       bh.output = {
         success: false,
+
         statusCode: bh.input.error?.statusCode || 500,
+
         message: bh.input.error?.message || 'Something went wrong',
       };
 
+      return bh;
       this.tracerService.sendData(spanInst, bh);
-
       await this.sd_vwxK9AvXrPjLXGgx(bh, parentSpanInst);
-
+      //appendnew_next_sd_jivdFNE9Jxw93Xj6
       return bh;
     } catch (e) {
       return await this.errorHandler(

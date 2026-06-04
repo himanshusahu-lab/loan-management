@@ -1,4 +1,8 @@
 //CORE_REFERENCE_IMPORTS
+//CORE_REFERENCE_IMPORT-validationController-SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw
+import { validationController as SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw } from './sd-services/reelsCOntroller/validationController';
+//CORE_REFERENCE_IMPORT-validation-SSD_SERVICE_ID_sd_W02sahXrI9dSThHb
+import { validation as SSD_SERVICE_ID_sd_W02sahXrI9dSThHb } from './sd-services/ReelsServices/validation';
 //CORE_REFERENCE_IMPORT-risk_categories-SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX
 import { risk_categories as SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX } from './sd-services/ReelsServices/risk_categories';
 //CORE_REFERENCE_IMPORT-required_doc-SSD_SERVICE_ID_sd_TlsrJEODXf8FEOlR
@@ -34,6 +38,10 @@ import { ids as sd_LRum6OapYNAIawtM } from './sd-services/ids';
 
 export const UserRoutes = [
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-validationController-SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw
+SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw,
+//CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-validation-SSD_SERVICE_ID_sd_W02sahXrI9dSThHb
+SSD_SERVICE_ID_sd_W02sahXrI9dSThHb,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-risk_categories-SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX
 SSD_SERVICE_ID_sd_hg93oiE5YnLi6CYX,
 //CORE_REFERENCE_PUSH_TO_ROUTE_ARRAY-required_doc-SSD_SERVICE_ID_sd_TlsrJEODXf8FEOlR
