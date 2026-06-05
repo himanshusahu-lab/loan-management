@@ -108,4 +108,46 @@ export class loan_applications {
   risk_category: string;
   @Column({ name: 'remarks', nullable: false, type: 'text', primary: false })
   remarks: string;
+  @Column({
+    name: 'review_stage',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  review_stage: string;
+  @Column({
+    name: 'loan_account_number',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  loan_account_number: string;
+  @Column({
+    name: 'submitted_at',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  submitted_at: string;
+  @Column({
+    name: 'approved_at',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  approved_at: string;
+  @Column({
+    name: 'rejected_at',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  rejected_at: string;
+  @Column({
+    name: 'rejection_reason',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  rejection_reason: string;
 }

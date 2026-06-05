@@ -380,6 +380,108 @@
                 "dbColName": "",
                 "constraints": {}
             }
+        },
+        "review_stage": {
+            "name": "review_stage",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_dl4frr7so2",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "loan_account_number": {
+            "name": "loan_account_number",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_u4eike7g9h",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "submitted_at": {
+            "name": "submitted_at",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_fjbco9v2tr",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "approved_at": {
+            "name": "approved_at",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_v6r9q9w5qg",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "rejected_at": {
+            "name": "rejected_at",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_xwltg2snq5",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "rejection_reason": {
+            "name": "rejection_reason",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_bq4lqi00dm",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
         }
     },
     "required": [
@@ -403,7 +505,13 @@
         "emi",
         "risk_category",
         "debt_to_income_ratio",
-        "remarks"
+        "remarks",
+        "review_stage",
+        "loan_account_number",
+        "submitted_at",
+        "approved_at",
+        "rejected_at",
+        "rejection_reason"
     ],
     "value": "",
     "__attributeExpansion__": true,

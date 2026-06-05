@@ -10,6 +10,7 @@ import { SDBaseService } from '../../services/SDBaseService'; //_splitter_
 import { TracerService } from '../../services/TracerService'; //_splitter_
 import log from '../../utils/Logger'; //_splitter_
 import { DmUtils } from '../../utils/ndefault-datamodel/find/dmUtils'; //_splitter_
+import * as SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw from '../reelsCOntroller/validationController'; //_splitter_
 //append_imports_end
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -128,123 +129,42 @@ export class create_loan {
     );
     try {
       let data = bh.input.body;
-
       let errors = [];
 
-      // Default status
       if (!data.status) {
         data.status = 'DRAFT';
       }
 
-      let isDraft = data.status === 'DRAFT';
+      const isDraft = data.status === 'DRAFT';
+      const isSubmitted = data.status === 'SUBMITTED';
 
-      let isSubmitted = data.status === 'SUBMITTED';
-
-      // --------------------
-      // DRAFT VALIDATIONS
-      // --------------------
-
-      if (isDraft) {
-        if (!data.applicant_name) {
-          errors.push('Applicant name required');
-        }
-
-        if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-          errors.push('Invalid email format');
-        }
-
-        if (data.mobile && !/^\d{10}$/.test(data.mobile)) {
-          errors.push('Mobile must be 10 digits');
-        }
+      if (!isDraft && !isSubmitted) {
+        errors.push('Invalid status');
       }
 
-      // --------------------
-      // SUBMITTED VALIDATIONS
-      // --------------------
-
       if (isSubmitted) {
-        let requiredFields = [
-          'applicant_name',
+        if (!data.employment_type) errors.push('employment_type is required');
 
-          'dob',
+        if (!data.monthly_income) errors.push('monthly_income is required');
 
-          'gender',
+        if (!data.loan_type) errors.push('loan_type is required');
 
-          'mobile',
+        if (!data.loan_amount) errors.push('loan_amount is required');
 
-          'email',
+        if (!data.loan_tenure) errors.push('loan_tenure is required');
 
-          'address',
+        if (!data.credit_score) errors.push('credit_score is required');
 
-          'employment_type',
-
-          'monthly_income',
-
-          'loan_type',
-
-          'loan_amount',
-
-          'loan_tenure',
-
-          'credit_score',
-
-          'purpose_of_loan',
-        ];
-
-        requiredFields.forEach((field) => {
-          if (!data[field]) {
-            errors.push(`${field} is required`);
-          }
-        });
-
-        // Email validation
-        if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
-          errors.push('Invalid email format');
-        }
-
-        // Mobile validation
-        if (data.mobile && !/^\d{10}$/.test(data.mobile)) {
-          errors.push('Mobile must be 10 digits');
-        }
-
-        // Age validation
-        if (data.dob) {
-          let dob = new Date(data.dob);
-
-          let age = new Date().getFullYear() - dob.getFullYear();
-
-          if (age < 21 || age > 60) {
-            errors.push('Age must be between 21 and 60');
-          }
-        }
-
-        // Loan amount
-        if (data.loan_amount < 50000 || data.loan_amount > 5000000) {
-          errors.push('Loan amount must be between 50,000 and 50,00,000');
-        }
-
-        // Credit score
-        if (data.credit_score < 300 || data.credit_score > 900) {
-          errors.push('Credit score must be between 300 and 900');
-        }
-
-        // Income
-        if (data.monthly_income <= 0) {
-          errors.push('Monthly income must be positive');
-        }
+        if (!data.purpose_of_loan) errors.push('purpose_of_loan is required');
       }
 
       if (errors.length > 0) {
-        bh.input.error = {
-          statusCode: 400,
-
-          message: errors.join(', '),
-        };
-
-        throw new Error(errors.join(', '));
+        let err = new Error(errors.join(', '));
+        err.statusCode = 400;
+        throw err;
       }
 
-      bh.local.loanData = data;
+      bh.local.loanRequest = data;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.generateApplicationId(bh, parentSpanInst);
       //appendnew_next_validateRequest
@@ -266,11 +186,9 @@ export class create_loan {
       parentSpanInst
     );
     try {
-      let random = Math.floor(Math.random() * 10000);
+      const timestamp = Date.now();
 
-      bh.local.applicationId = 'LN2026' + random;
-
-      console.log('Generated Application ID:', bh.local.applicationId);
+      bh.local.applicationId = `LN_2026_${timestamp}`;
       this.tracerService.sendData(spanInst, bh);
       bh = await this.prepareLoanData(bh, parentSpanInst);
       //appendnew_next_generateApplicationId
@@ -292,49 +210,41 @@ export class create_loan {
       parentSpanInst
     );
     try {
-      let body = bh.local.loanData;
+      const data = bh.local.loanRequest;
 
-      bh.local.loanData = {
+      bh.local.loanInsertData = {
         application_id: bh.local.applicationId,
 
-        user_id: body.user_id ?? null,
+        applicant_name: data.applicant_name,
 
-        applicant_name: body.applicant_name || null,
+        dob: data.dob,
 
-        dob: body.dob || null,
+        gender: data.gender,
 
-        gender: body.gender || null,
+        mobile: data.mobile,
 
-        mobile: body.mobile || null,
+        email: data.email,
 
-        email: body.email || null,
+        address: data.address,
 
-        address: body.address || null,
+        employment_type: data.employment_type,
 
-        employment_type: body.employment_type || null,
+        employer_name: data.employer_name,
 
-        employer_name: body.employer_name || null,
+        monthly_income: data.monthly_income,
 
-        monthly_income: body.monthly_income || null,
+        loan_type: data.loan_type,
 
-        loan_type: body.loan_type || null,
+        loan_amount: data.loan_amount,
 
-        loan_amount: body.loan_amount || null,
+        loan_tenure: data.loan_tenure,
 
-        loan_tenure: body.loan_tenure || null,
+        credit_score: data.credit_score,
 
-        credit_score: body.credit_score || null,
+        purpose_of_loan: data.purpose_of_loan,
 
-        purpose_of_loan: body.purpose_of_loan || null,
-
-        status: body.status || 'DRAFT',
-
-        submitted_at: body.status === 'SUBMITTED' ? new Date() : null,
+        status: data.status,
       };
-
-      console.log('Loan Data:', bh.local.loanData);
-
-      console.log(JSON.stringify(bh.local.loanData, null, 2));
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_IdKnnQJ1cUVPLPAr(bh, parentSpanInst);
       //appendnew_next_prepareLoanData
@@ -359,11 +269,11 @@ export class create_loan {
       const dmUtilsInst = new DmUtils('sd_Pela28njo43vGVh7');
       bh.local.insertResult = await dmUtilsInst.insert(
         '_EN_u6exdr1rwe',
-        bh.local.loanData
+        bh.local.loanInsertData
       );
 
       this.tracerService.sendData(spanInst, bh);
-      bh = await this.checkApplicationStatus(bh, parentSpanInst);
+      bh = await this.prepareValidationPayload(bh, parentSpanInst);
       //appendnew_next_sd_IdKnnQJ1cUVPLPAr
       return bh;
     } catch (e) {
@@ -377,6 +287,177 @@ export class create_loan {
     }
   }
 
+  async prepareValidationPayload(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'prepareValidationPayload',
+      parentSpanInst
+    );
+    try {
+      const loan = bh.local.loanRequest;
+      console.log('loan >>>> ', loan, bh.input.body);
+
+      // Calculate age from DOB
+      let age = null;
+
+      if (loan.dob) {
+        const dob = new Date(loan.dob);
+
+        age = new Date().getFullYear() - dob.getFullYear();
+      }
+      bh.local.validationPayload = {
+        age: age,
+
+        loan_type: bh.local.loanInsertData.loan_type,
+
+        loan_amount: bh.local.loanInsertData.loan_amount,
+
+        loan_tenure: bh.local.loanInsertData.loan_tenure,
+
+        credit_score: bh.local.loanInsertData.credit_score,
+
+        monthly_income: bh.local.loanInsertData.monthly_income,
+      };
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.sd_W7SvquPoKQymGhmR(bh, parentSpanInst);
+      //appendnew_next_prepareValidationPayload
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_uPDlXoyTns0rbtwj',
+        spanInst,
+        'prepareValidationPayload'
+      );
+    }
+  }
+
+  async sd_W7SvquPoKQymGhmR(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'sd_W7SvquPoKQymGhmR',
+      parentSpanInst
+    );
+    try {
+      const SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVwInstance: SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw.validationController =
+        SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw.validationController.getInstance();
+      let outputVariables =
+        await SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVwInstance.validationController(
+          spanInst,
+          bh.local.validationPayload
+        );
+      bh.local.reelsResponse = outputVariables.local.result;
+
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.validateReelsResponse(bh, parentSpanInst);
+      //appendnew_next_sd_W7SvquPoKQymGhmR
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_W7SvquPoKQymGhmR',
+        spanInst,
+        'sd_W7SvquPoKQymGhmR'
+      );
+    }
+  }
+
+  async validateReelsResponse(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'validateReelsResponse',
+      parentSpanInst
+    );
+    try {
+      let result = bh.local.reelsResponse.payload.result;
+      console.log('Reels data return => ', result);
+
+      if (!result) {
+        bh.input.error = {
+          statusCode: 500,
+
+          message: 'Validation Controller returned empty response',
+        };
+
+        throw new Error('Validation Controller returned empty response');
+      }
+
+      bh.local.loanMetrics = result;
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.assignReviewTask(bh, parentSpanInst);
+      //appendnew_next_validateReelsResponse
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_6W2u4jo9MzkvsQdh',
+        spanInst,
+        'validateReelsResponse'
+      );
+    }
+  }
+
+  async assignReviewTask(bh, parentSpanInst) {
+    const spanInst = this.tracerService.createSpan(
+      'assignReviewTask',
+      parentSpanInst
+    );
+    try {
+      let assignedRole = null;
+      let reviewStage = null;
+
+      if (bh.local.loanRequest.status === 'SUBMITTED') {
+        bh.local.submittedAt = new Date().toISOString();
+      }
+
+      switch (bh.local.loanDecision) {
+        case 'AUTO_APPROVE':
+          assignedRole = null;
+          reviewStage = null;
+
+          break;
+
+        case 'LOAN_OFFICER_REVIEW':
+          assignedRole = 'LOAN_OFFICER';
+          reviewStage = 'LOAN_OFFICER_REVIEW';
+
+          break;
+
+        case 'CREDIT_MANAGER_REVIEW':
+          assignedRole = 'CREDIT_MANAGER';
+          reviewStage = 'CREDIT_MANAGER_REVIEW';
+
+          break;
+
+        default:
+          assignedRole = 'CREDIT_MANAGER';
+          reviewStage = 'CREDIT_MANAGER_REVIEW';
+      }
+
+      bh.local.assignedRole = assignedRole;
+
+      bh.local.reviewStage = reviewStage;
+
+      console.log({
+        assignedRole,
+        reviewStage,
+        submittedAt: bh.local.submittedAt,
+      });
+      this.tracerService.sendData(spanInst, bh);
+      bh = await this.checkApplicationStatus(bh, parentSpanInst);
+      //appendnew_next_assignReviewTask
+      return bh;
+    } catch (e) {
+      return await this.errorHandler(
+        bh,
+        e,
+        'sd_5PXyyzw2y3eH0KBv',
+        spanInst,
+        'assignReviewTask'
+      );
+    }
+  }
+
   async checkApplicationStatus(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
       'checkApplicationStatus',
@@ -385,16 +466,16 @@ export class create_loan {
     try {
       if (
         this.sdService.operators['eq'](
-          bh.local.loanData.status,
+          bh.local.loanRequest.status,
           'SUBMITTED',
           undefined,
           undefined
         )
       ) {
-        bh = await this.calculateLoanMetrics(bh, parentSpanInst);
+        bh = await this.prepareFinalLoanUpdate(bh, parentSpanInst);
       } else if (
         this.sdService.operators['eq'](
-          bh.local.loanData.status,
+          bh.local.loanRequest.status,
           'DRAFT',
           undefined,
           undefined
@@ -416,151 +497,6 @@ export class create_loan {
     }
   }
 
-  async calculateLoanMetrics(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'calculateLoanMetrics',
-      parentSpanInst
-    );
-    try {
-      let loanAmount = bh.local.loanData.loan_amount;
-
-      let tenureMonths = bh.local.loanData.loan_tenure;
-
-      let annualInterestRate = 8.5;
-
-      let monthlyIncome = bh.local.loanData.monthly_income;
-
-      let creditScore = bh.local.loanData.credit_score;
-
-      // Monthly Interest Rate
-      let monthlyRate = annualInterestRate / 12 / 100;
-
-      // EMI Formula
-      let emi =
-        (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, tenureMonths)) /
-        (Math.pow(1 + monthlyRate, tenureMonths) - 1);
-
-      // Debt To Income Ratio
-      let dti = emi / monthlyIncome;
-
-      // Risk Logic
-      let riskCategory = 'HIGH';
-
-      if (creditScore >= 750 && dti < 0.4) {
-        riskCategory = 'LOW';
-      } else if (creditScore >= 650 && dti < 0.6) {
-        riskCategory = 'MEDIUM';
-      }
-
-      // Store Data
-      bh.local.calculatedMetrics = {
-        interest_rate: annualInterestRate,
-
-        emi: Number(emi.toFixed(2)),
-
-        debt_to_income_ratio: Number(dti.toFixed(2)),
-
-        risk_category: riskCategory,
-      };
-
-      console.log('Calculated Metrics:', bh.local.calculatedMetrics);
-
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.loanDecisionEngine(bh, parentSpanInst);
-      //appendnew_next_calculateLoanMetrics
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_MGSvMtbMJHGDggPH',
-        spanInst,
-        'calculateLoanMetrics'
-      );
-    }
-  }
-
-  async loanDecisionEngine(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'loanDecisionEngine',
-      parentSpanInst
-    );
-    try {
-      let risk = bh.local.calculatedMetrics.risk_category;
-
-      let decision = '';
-      let status = '';
-
-      if (risk === 'LOW') {
-        decision = 'AUTO_APPROVE';
-
-        status = 'APPROVED';
-      } else if (risk === 'MEDIUM') {
-        decision = 'LOAN_OFFICER_REVIEW';
-
-        status = 'UNDER_REVIEW';
-      } else {
-        decision = 'CREDIT_MANAGER_REVIEW';
-
-        status = 'UNDER_REVIEW';
-      }
-
-      bh.local.loanDecision = decision;
-
-      bh.local.loanStatus = status;
-
-      console.log('Decision:', decision);
-
-      console.log('Status:', status);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.assignReviewTask(bh, parentSpanInst);
-      //appendnew_next_loanDecisionEngine
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_hSEREAd624NTmDgY',
-        spanInst,
-        'loanDecisionEngine'
-      );
-    }
-  }
-
-  async assignReviewTask(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'assignReviewTask',
-      parentSpanInst
-    );
-    try {
-      let assignedRole = '';
-
-      if (bh.local.loanDecision === 'AUTO_APPROVE') {
-        assignedRole = 'CREDIT_MANAGER';
-      } else if (bh.local.loanDecision === 'LOAN_OFFICER_REVIEW') {
-        assignedRole = 'LOAN_OFFICER';
-      } else {
-        assignedRole = 'CREDIT_MANAGER';
-      }
-
-      bh.local.assignedRole = assignedRole;
-
-      console.log('Assigned Role:', assignedRole);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.prepareFinalLoanUpdate(bh, parentSpanInst);
-      //appendnew_next_assignReviewTask
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_5PXyyzw2y3eH0KBv',
-        spanInst,
-        'assignReviewTask'
-      );
-    }
-  }
-
   async prepareFinalLoanUpdate(bh, parentSpanInst) {
     const spanInst = this.tracerService.createSpan(
       'prepareFinalLoanUpdate',
@@ -568,15 +504,18 @@ export class create_loan {
     );
     try {
       bh.local.finalUpdateData = {
-        interest_rate: bh.local.calculatedMetrics.interest_rate,
+        interest_rate: bh.local.loanMetrics.interest_rate,
 
-        emi: bh.local.calculatedMetrics.emi,
+        emi: bh.local.loanMetrics.emi,
 
-        debt_to_income_ratio: bh.local.calculatedMetrics.debt_to_income_ratio,
+        debt_to_income_ratio: bh.local.loanMetrics.dti_ratio,
 
-        risk_category: bh.local.calculatedMetrics.risk_category,
+        risk_category: bh.local.loanMetrics.dti_status,
 
-        remarks: bh.local.loanDecision,
+        review_stage: bh.local.reviewStage,
+
+        remarks: null,
+        submitted_at: bh.local.submittedAt || null,
 
         status: bh.local.loanStatus,
         id: bh.local.insertResult?.id,
@@ -627,7 +566,7 @@ export class create_loan {
       const dmUtilsInst = new DmUtils('sd_Pela28njo43vGVh7');
       bh.local.updateFinalResult = await dmUtilsInst.updateByFilter(
         '_EN_u6exdr1rwe',
-        bh.local.finalUpdateData.id,
+        bh.local.insertResult.id,
         bh.local.finalUpdateData
       );
 
@@ -690,18 +629,16 @@ export class create_loan {
       parentSpanInst
     );
     try {
-      bh.output = {
+      bh.local.response = {
         success: true,
 
-        message: 'Loan application saved as draft successfully',
+        applicationId: bh.local.applicationId,
 
-        data: {
-          application_id: bh.local.loanData.application_id,
+        status: 'DRAFT',
 
-          applicant_name: bh.local.loanData.applicant_name,
+        message: 'Application saved as draft',
 
-          status: 'DRAFT',
-        },
+        timestamp: new Date().toISOString(),
       };
       this.tracerService.sendData(spanInst, bh);
       await this.sd_jqwvpMRoPmtLYANR(bh, parentSpanInst);
@@ -720,7 +657,7 @@ export class create_loan {
 
   async sd_jqwvpMRoPmtLYANR(bh, parentSpanInst) {
     try {
-      bh.web.res.status(200).send(bh.output);
+      bh.web.res.status(200).send(bh.local.response);
 
       return bh;
     } catch (e) {
