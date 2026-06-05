@@ -1,0 +1,194 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+        "type": "tab",
+        "createdDate": "2026-06-04T06:51:05.609Z",
+        "label": "validationController",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "validationController",
+        "relativeParentPath": "reelsCOntroller"
+    },
+    {
+        "id": "sd_VK2xDlSlyWOw0wJ0",
+        "type": "Script",
+        "z": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "script": "const body = bh.input.body || {};\n\nconsole.log(\"Runtime Request:\", body,bh.local.result);\n\nbh.local.payload = {\n  workflowId: \"ff50a9f1-b76b-4ddd-92e4-4d5c5e0da20f\",\n\n  version: \"1.0.13\",\n\n  inputObj: {\n\n    age:\n      body.age,\n\n    loan_amount:\n      body.loan_amount,\n\n    loan_tenure:\n      body.loan_tenure,\n\n    credit_score:\n      body.credit_score,\n\n    interest_rate:\n      body.interest_rate,\n    loan_type:\n      body.loan_type,\n\n    monthly_income:\n      body.monthly_income\n  }\n};\n\nconsole.log(\"Prepared Payload:\", bh.local.payload);",
+        "functionName": "sd_VK2xDlSlyWOw0wJ0",
+        "category": "Function",
+        "x": 245,
+        "y": 160,
+        "wires": [
+            [
+                "sd_4CLWmJh8MFXHwTH1"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "validationController",
+        "generated": true
+    },
+    {
+        "id": "sd_4CLWmJh8MFXHwTH1",
+        "type": "ServerHttpRequest",
+        "z": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "method": "post",
+        "methodMappingObj": {},
+        "urlMapping": "\"https://reels-pt.neutrinos-apps.com/integration/api/runtime/sync\"",
+        "urlMappingObj": {
+            "mapVarType": "str",
+            "mapVarValue": "https://reels-pt.neutrinos-apps.com/integration/api/runtime/sync"
+        },
+        "ret": "json",
+        "retMappingObj": {},
+        "reqBody": "bh.local.payload",
+        "reqBodyObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "payload"
+        },
+        "resultMapping": "bh.local.result",
+        "resultMappingObj": {
+            "mapVarType": "bh.local",
+            "mapVarValue": "result"
+        },
+        "headers": {
+            "accept": "application/json",
+            "token": "8ea87043-d82d-44d2-895c-166b6c2042a8.8e615412e4028585ee71d1dd19d0f06d2d74d079a1875c4dd87a5062155dda2d",
+            "Content-Type": "application/json"
+        },
+        "headersObj": [
+            {
+                "key": "accept",
+                "defaultValue": "application/json"
+            },
+            {
+                "key": "token",
+                "defaultValue": "8ea87043-d82d-44d2-895c-166b6c2042a8.8e615412e4028585ee71d1dd19d0f06d2d74d079a1875c4dd87a5062155dda2d"
+            },
+            {
+                "key": "Content-Type",
+                "defaultValue": "application/json"
+            }
+        ],
+        "headerMappingObj": {},
+        "params": {},
+        "paramsObj": [],
+        "paramMappingObj": {},
+        "useAuthTypeMappingObj": {},
+        "useAuthUsername": "",
+        "useAuthUsernameMappingObj": "",
+        "useAuthPassword": "",
+        "useAuthPasswordMappingObj": "",
+        "useAuthToken": "",
+        "useAuthTokenMappingObj": "",
+        "useQueryString": false,
+        "tls": "",
+        "followRedirect": true,
+        "paytoqs": false,
+        "useAuthentication": false,
+        "rejectUnauthorized": false,
+        "proxy": "",
+        "useProxy": false,
+        "usetls": false,
+        "cookiesMapObj": {},
+        "cookiesList": {},
+        "switchStates": {
+            "cookies": "Map"
+        },
+        "editableListData": {},
+        "timeout": {
+            "type": "num",
+            "value": ""
+        },
+        "functionName": "sd_4CLWmJh8MFXHwTH1",
+        "category": "HTTP",
+        "x": 385,
+        "y": 160,
+        "wires": [
+            [
+                "sd_d38ojZiLNZjek4Ej"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "validationController",
+        "generated": true
+    },
+    {
+        "id": "sd_RWotEaBVUSsEmIeU",
+        "type": "Start",
+        "z": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+        "viewType": "client-server",
+        "nodeType": "start",
+        "name": "ValidationController",
+        "outputs": 1,
+        "inputVariables": [
+            {
+                "key": "body",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": false
+            }
+        ],
+        "localVariables": [
+            {
+                "key": "result",
+                "defaultValue": {
+                    "type": "any",
+                    "value": ""
+                },
+                "output": true
+            }
+        ],
+        "accept_bh": false,
+        "functionName": "validationController",
+        "category": "General",
+        "x": 125,
+        "y": 160,
+        "wires": [
+            [
+                "sd_VK2xDlSlyWOw0wJ0"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "validationController"
+    },
+    {
+        "id": "sd_d38ojZiLNZjek4Ej",
+        "type": "ServerLog",
+        "z": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 0,
+        "logObject": "bh.local.result",
+        "logLevel": "info",
+        "functionName": "sd_d38ojZiLNZjek4Ej",
+        "category": "General",
+        "x": 525,
+        "y": 160,
+        "wires": [],
+        "__ssdTypeInputs__": {
+            "logObject": {
+                "type": "bh.local",
+                "value": "result",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "validationController",
+        "generated": true
+    }
+]

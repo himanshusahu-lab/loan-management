@@ -1,0 +1,232 @@
+[
+    {
+        "id": "SSD_SERVICE_ID_sd_W02sahXrI9dSThHb",
+        "type": "tab",
+        "createdDate": "2026-06-04T08:21:29.404Z",
+        "label": "validation",
+        "disabled": false,
+        "info": "",
+        "functionSeq": 0,
+        "generateNext": true,
+        "serviceName": "validation",
+        "relativeParentPath": "ReelsServices"
+    },
+    {
+        "id": "sd_ikepfUHC03kdUp9B",
+        "type": "HttpIn",
+        "z": "SSD_SERVICE_ID_sd_W02sahXrI9dSThHb",
+        "viewType": "server",
+        "nodeType": "start",
+        "name": "reelsfinalEMI",
+        "path": "/reelscalc",
+        "uploadpath": "",
+        "summary": "",
+        "description": "",
+        "method": "post",
+        "sequenceId": "",
+        "consumes": "",
+        "produces": "",
+        "filetype": "path",
+        "acceptFileUpload": false,
+        "useDataModel": false,
+        "dataModelIsArray": false,
+        "erd": "",
+        "erdName": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "responses": [],
+            "params": [
+                {
+                    "key": "age",
+                    "desc": "age",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_Lk9yKlTHeRnsWQUL",
+                    "valid": true
+                },
+                {
+                    "key": "loan_amount",
+                    "desc": "loan_amount",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_Hf7nnZ7iSUyASbH1",
+                    "valid": true
+                },
+                {
+                    "key": "loan_tenure",
+                    "desc": "loan_tenure",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_9b7nhaDDvHT4dpFo",
+                    "valid": true
+                },
+                {
+                    "key": "credit_score",
+                    "desc": "credit_score",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_bWULjA7rv0Sg4u0x",
+                    "valid": true
+                },
+                {
+                    "key": "interest_rate",
+                    "desc": "interest_rate",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_QhDYQu5qZQbGps8R",
+                    "valid": true
+                },
+                {
+                    "key": "monthly_income",
+                    "desc": "monthly_income",
+                    "type": "body",
+                    "required": false,
+                    "rowId": "sd_9vXPXLEbPzuKvVEw",
+                    "valid": true
+                }
+            ],
+            "produces": [],
+            "consumes": []
+        },
+        "inputs": 0,
+        "outputs": 1,
+        "validateRequestUsingSwaggerDocs": false,
+        "category": "HTTP",
+        "x": 105,
+        "y": 240,
+        "wires": [
+            [
+                "sd_qEwoBu3sw1qNt4V3"
+            ]
+        ],
+        "__ssdTypeInputs__": {
+            "uploadpath": {
+                "type": "str",
+                "value": "",
+                "nullable": "true",
+                "nullableValue": "",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
+        "generateNext": true,
+        "serviceName": "validation",
+        "functionName": "sd_ikepfUHC03kdUp9B"
+    },
+    {
+        "id": "sd_roSGgNAv7FysT5Lr",
+        "type": "HttpOut",
+        "z": "SSD_SERVICE_ID_sd_W02sahXrI9dSThHb",
+        "viewType": "server",
+        "nodeType": "flow",
+        "name": "Out",
+        "headers": {},
+        "responseBody": {
+            "type": "bh.local",
+            "value": "result.payload",
+            "ssd_typedInputField": true
+        },
+        "httpcode": {
+            "type": "num",
+            "value": 200,
+            "ssd_typedInputField": true
+        },
+        "responseType": "obj",
+        "swaggerResponse": {},
+        "responseMapping": {
+            "status": 200,
+            "obj": "bh.local.result.payload",
+            "send": "bh.local.result.payload"
+        },
+        "dataModelIsArray": false,
+        "inputs": 1,
+        "outputs": 0,
+        "erd": "",
+        "entity": "",
+        "entityId": "",
+        "ref": "",
+        "editableListData": {
+            "headers": [],
+            "produces": [],
+            "responses": []
+        },
+        "cookiesList": {},
+        "switchStates": {
+            "headers": "Map",
+            "cookies": "Map"
+        },
+        "functionName": "out",
+        "category": "HTTP",
+        "x": 365,
+        "y": 240,
+        "wires": [],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "validation",
+        "generated": true
+    },
+    {
+        "id": "sd_qEwoBu3sw1qNt4V3",
+        "type": "CallService",
+        "z": "SSD_SERVICE_ID_sd_W02sahXrI9dSThHb",
+        "viewType": "common",
+        "nodeType": "flow",
+        "name": "",
+        "outputs": 1,
+        "isValidNode": true,
+        "noerr": 0,
+        "service": {
+            "id": "SSD_SERVICE_ID_sd_tYi8MoyRgBjSCqVw",
+            "type": "tab",
+            "createdDate": "2026-06-04T06:51:05.609Z",
+            "label": "validationController",
+            "disabled": false,
+            "info": "",
+            "functionSeq": 0
+        },
+        "flow": {
+            "flowId": "sd_RWotEaBVUSsEmIeU",
+            "flowName": "validationController"
+        },
+        "inputVariables": [
+            {
+                "key": "body",
+                "map": true,
+                "valueType": "bh.input",
+                "value": "body"
+            }
+        ],
+        "bhVariables": [],
+        "outputMapping": [
+            {
+                "mapVarType": "local",
+                "key": "result",
+                "valueType": "bh.local",
+                "value": "result",
+                "mapVarName": "result",
+                "localVar": "bh.local.result"
+            }
+        ],
+        "callService": "../reelsCOntroller/validationController",
+        "startName": "validationController",
+        "inputParams": [
+            "bh.input.body"
+        ],
+        "accept_bh": false,
+        "functionName": "sd_qEwoBu3sw1qNt4V3",
+        "category": "General",
+        "x": 225,
+        "y": 240,
+        "wires": [
+            [
+                "sd_roSGgNAv7FysT5Lr"
+            ]
+        ],
+        "__n_excludedFromValidation__": {},
+        "generateNext": false,
+        "serviceName": "validation",
+        "generated": true
+    }
+]

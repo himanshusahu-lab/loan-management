@@ -1,0 +1,52 @@
+{
+    "/reelscalc": {
+        "post": {
+            "summary": "",
+            "description": "",
+            "consumes": [],
+            "produces": [],
+            "parameters": [
+                {
+                    "in": "body",
+                    "name": "age",
+                    "description": "age",
+                    "required": false
+                },
+                {
+                    "in": "body",
+                    "name": "loan_amount",
+                    "description": "loan_amount",
+                    "required": false
+                },
+                {
+                    "in": "body",
+                    "name": "loan_tenure",
+                    "description": "loan_tenure",
+                    "required": false
+                },
+                {
+                    "in": "body",
+                    "name": "credit_score",
+                    "description": "credit_score",
+                    "required": false
+                },
+                {
+                    "in": "body",
+                    "name": "interest_rate",
+                    "description": "interest_rate",
+                    "required": false
+                },
+                {
+                    "in": "body",
+                    "name": "monthly_income",
+                    "description": "monthly_income",
+                    "required": false
+                }
+            ],
+            "responses": {},
+            "tags": [
+                "validation"
+            ]
+        }
+    }
+}
