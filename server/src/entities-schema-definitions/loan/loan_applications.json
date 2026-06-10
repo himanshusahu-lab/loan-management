@@ -4,7 +4,7 @@
     "description": "",
     "type": "object",
     "id": "_EN_u6exdr1rwe",
-    "y": -1.6875,
+    "y": -2,
     "properties": {
         "id": {
             "name": "id",
@@ -516,7 +516,7 @@
     "value": "",
     "__attributeExpansion__": true,
     "__operationExpansion__": false,
-    "x": 84,
+    "x": 35,
     "userList": {
         "SSD_SERVICE_ID_sd_OCFPZN0MmWagZypd": [
             "sd_uhHDhGzmGrWP3PPz"

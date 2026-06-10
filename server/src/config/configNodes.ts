@@ -8,7 +8,7 @@ export default {
             "nodeType": "flow",
             "dbOption": {
                 "type": "postgres",
-                "host": "aws-1-ap-northeast-1.pooler.supabase.com.com",
+                "host": "aws-1-ap-northeast-1.pooler.supabase.com",
                 "port": 6543,
                 "username": "postgres.oemomdlgseiabkrarwbp",
                 "password": "Himanshu@123",
@@ -210,7 +210,7 @@ export default {
                 },
                 "postgres_host": {
                     "type": "str",
-                    "value": "aws-1-ap-northeast-1.pooler.supabase.com.com"
+                    "value": "aws-1-ap-northeast-1.pooler.supabase.com"
                 },
                 "postgres_port": {
                     "type": "num",
@@ -250,77 +250,20 @@ export default {
             "nodeType": "flow",
             "dbOption": {
                 "type": "postgres",
-                "host": "localhost",
-                "port": 5432,
-                "username": "postgres",
-                "password": "123456",
-                "database": "loan_management",
+                "host": "aws-1-ap-northeast-1.pooler.supabase.com",
+                "port": 6543,
+                "username": "postgres.oemomdlgseiabkrarwbp",
+                "password": "Himanshu@123",
+                "database": "postgres",
                 "schema": "public",
                 "uuidExtension": "",
                 "synchronize": false,
                 "name": "postgres_1"
             },
+            "disabledb": true,
             "selectedDB": "postgres",
             "selectedOption": "postgres",
             "dbCategory": "sql",
-            "mssql_type": "mssql",
-            "mssql_host": "localhost",
-            "mssql_port": 1433,
-            "mssql_username": "username",
-            "mssql_password": "password",
-            "mssql_database": "database",
-            "mssql_connectionTimeout": 15000,
-            "mssql_requestTimeout": 15000,
-            "mssql_synchronize": false,
-            "mssql_options.instanceName": "",
-            "mssql_pool.max": 10,
-            "mssql_pool.min": 1,
-            "mssql_pool.idleTimeoutMillis": 30000,
-            "mssql_options.cancelTimeout": 5000,
-            "mssql_options.packetSize": 4096,
-            "mssql_options.useUTC": true,
-            "mssql_options.localAddress": "",
-            "mssql_options.readOnlyIntent": false,
-            "mssql_options.encrypt": false,
-            "oracle_type": "oracle",
-            "oracle_connectString": "oracle",
-            "oracle_host": "localhost",
-            "oracle_port": 1521,
-            "oracle_username": "username",
-            "oracle_password": "password",
-            "oracle_serviceName": "orcl",
-            "oracle_connectionTimeout": 15000,
-            "oracle_requestTimeout": 15000,
-            "oracle_synchronize": false,
-            "mysql_type": "mysql",
-            "mysql_host": "localhost",
-            "mysql_port": 3306,
-            "mysql_username": "username",
-            "mysql_password": "password",
-            "mysql_database": "database",
-            "mysql_synchronize": false,
-            "mysql_extra.connectionLimit": 10,
-            "mysql_charset": "UTF8_GENERAL_CI",
-            "mysql_timezone": "local",
-            "mysql_connectTimout": 10000,
-            "mysql_acquireTimeout": 10000,
-            "mysql_insecureAuth": false,
-            "mysql_supportBigNumbers": true,
-            "mysql_bigNumberStrings": false,
-            "mysql_dateStrings": false,
-            "mysql_debug": false,
-            "mysql_trace": true,
-            "mysql_multipleStatements": false,
-            "mysql_flags": "flags",
-            "postgres_type": "postgres",
-            "postgres_host": "localhost",
-            "postgres_port": 5432,
-            "postgres_username": "postgres",
-            "postgres_password": "123456",
-            "postgres_database": "loan_management",
-            "postgres_schema": "public",
-            "postgres_uuidExtension": "",
-            "postgres_synchronize": false,
             "category": "config",
             "__ssdTypeInputs__": {
                 "mssql_host": {
@@ -509,23 +452,23 @@ export default {
                 },
                 "postgres_host": {
                     "type": "str",
-                    "value": "localhost"
+                    "value": "aws-1-ap-northeast-1.pooler.supabase.com"
                 },
                 "postgres_port": {
                     "type": "num",
-                    "value": 5432
+                    "value": 6543
                 },
                 "postgres_username": {
                     "type": "str",
-                    "value": "postgres"
+                    "value": "postgres.oemomdlgseiabkrarwbp"
                 },
                 "postgres_password": {
                     "type": "str",
-                    "value": "123456"
+                    "value": "Himanshu@123"
                 },
                 "postgres_database": {
                     "type": "str",
-                    "value": "loan_management"
+                    "value": "postgres"
                 },
                 "postgres_schema": {
                     "type": "str",

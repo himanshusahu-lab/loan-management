@@ -159,7 +159,7 @@ export class create_loan {
       }
 
       if (errors.length > 0) {
-        let err:any = new Error(errors.join(', '));
+        let err = new Error(errors.join(', '));
         err.statusCode = 400;
         throw err;
       }
