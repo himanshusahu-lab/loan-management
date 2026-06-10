@@ -8,7 +8,7 @@ export default {
             "nodeType": "flow",
             "dbOption": {
                 "type": "postgres",
-                "host": "aws-1-ap-northeast-1.pooler.supabase.com",
+                "host": "aws-1-ap-northeast-1.pooler.supabase.com.com",
                 "port": 6543,
                 "username": "postgres.oemomdlgseiabkrarwbp",
                 "password": "Himanshu@123",
@@ -210,7 +210,7 @@ export default {
                 },
                 "postgres_host": {
                     "type": "str",
-                    "value": "aws-1-ap-northeast-1.pooler.supabase.com"
+                    "value": "aws-1-ap-northeast-1.pooler.supabase.com.com"
                 },
                 "postgres_port": {
                     "type": "num",
