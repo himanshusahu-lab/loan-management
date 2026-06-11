@@ -12,11 +12,20 @@ const __dirname = dirname(__filename);
 export let Middlewares = {
   cors: () => {
     let corsOptions = {
-      origin: ['http://localhost:4200'],
+      origin: ['https://alpha-pt.neutrinos-apps.com'],
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+      allowedHeaders: [
+        'Content-Type',
+        'Authorization',
+        'Accept',
+        'Origin',
+        'X-Requested-With',
+      ],
 
-      credentials: true,
+      credentials: false,
 
       preflightContinue: false,
+      optionsSuccessStatus: 204,
     };
     return cors(corsOptions);
   },

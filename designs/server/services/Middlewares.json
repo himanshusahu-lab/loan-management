@@ -8,8 +8,7 @@
         "info": "",
         "generateNext": true,
         "serviceName": "Middlewares",
-        "relativeParentPath": "",
-        "viewType": "server"
+        "relativeParentPath": ""
     },
     {
         "id": "ssd_global_middleware_start_id",
@@ -75,12 +74,69 @@
         "methods": [],
         "origin": true,
         "editableListData": {
-            "methods": [],
-            "allowedHeaders": [],
+            "methods": [
+                {
+                    "key": "GET",
+                    "rowId": "sd_rvuGVsLUu1OnCerF",
+                    "valid": true
+                },
+                {
+                    "key": "POST",
+                    "rowId": "sd_16onhaQRj11Y4IAB",
+                    "valid": true
+                },
+                {
+                    "key": "PUT",
+                    "rowId": "sd_kkC2cPPEVMQXu0P2",
+                    "valid": true
+                },
+                {
+                    "key": "DELETE",
+                    "rowId": "sd_LUru7pJOgHJnbbSc",
+                    "valid": true
+                },
+                {
+                    "key": "PATCH",
+                    "rowId": "sd_srNw6TiWxR5v5g6Y",
+                    "valid": true
+                },
+                {
+                    "key": "OPTIONS",
+                    "rowId": "sd_2eAjTs0MbASylkGN",
+                    "valid": true
+                }
+            ],
+            "allowedHeaders": [
+                {
+                    "key": "Content-Type",
+                    "rowId": "sd_AyxDjY8FjLWNpxsh",
+                    "valid": true
+                },
+                {
+                    "key": "Authorization",
+                    "rowId": "sd_pO6p13NHqcP5KSZd",
+                    "valid": true
+                },
+                {
+                    "key": "Accept",
+                    "rowId": "sd_37UMb7JZT6nQQjRB",
+                    "valid": true
+                },
+                {
+                    "key": "Origin",
+                    "rowId": "sd_EvlJsQ29X1gxqo9m",
+                    "valid": true
+                },
+                {
+                    "key": "X-Requested-With",
+                    "rowId": "sd_yxeOzi8coZA4TNoW",
+                    "valid": true
+                }
+            ],
             "exposedHeaders": [],
             "origin": [
                 {
-                    "key": "http://localhost:4200",
+                    "key": "https://alpha-pt.neutrinos-apps.com",
                     "rowId": "sd_K9iHmN6SZ2iPMqEF",
                     "valid": true,
                     "type": "str"
@@ -88,10 +144,10 @@
             ]
         },
         "showOriginToggleButton": false,
-        "credentials": true,
+        "credentials": false,
         "maxAge": "",
         "preflightContinue": false,
-        "optionsSuccessStatus": "",
+        "optionsSuccessStatus": "204",
         "functionName": "cors",
         "category": "Global",
         "x": 561,
@@ -129,12 +185,6 @@
         "store": "",
         "functionName": "sd_7EmxxOk703exD5hF",
         "category": "Global",
-        "__ssdTypeInputs__": {
-            "secret": {
-                "type": "str",
-                "value": "qPXoLFLDtk"
-            }
-        },
         "x": 421,
         "y": 102.8125,
         "wires": [
@@ -142,13 +192,20 @@
                 "sd_Tp9jNbUvUZ1kJnAn"
             ]
         ],
+        "__ssdTypeInputs__": {
+            "secret": {
+                "type": "str",
+                "value": "qPXoLFLDtk",
+                "constant": false
+            }
+        },
+        "__n_excludedFromValidation__": {},
         "generateNext": true
     },
     {
         "id": "sd_C9VRO0iOLqxUzNzT",
         "type": "ids:hrefstart",
         "z": "ssd_mw_ws",
-        "viewType": "server",
         "name": "ids:hrefstart",
         "inputs": 1,
         "outputs": 1,
@@ -160,6 +217,7 @@
                 "sd_7EmxxOk703exD5hF"
             ]
         ],
+        "__n_excludedFromValidation__": {},
         "generateNext": true,
         "functionName": "sd_C9VRO0iOLqxUzNzT"
     },
@@ -180,13 +238,13 @@
                 "sd_ISirC5Fy6p3Du7i8"
             ]
         ],
+        "__n_excludedFromValidation__": {},
         "generateNext": true
     },
     {
         "id": "sd_ISirC5Fy6p3Du7i8",
         "type": "ids:Authorize",
         "z": "ssd_mw_ws",
-        "viewType": "server",
         "name": "ids:Authorize",
         "inputs": 1,
         "outputs": 1,
@@ -198,6 +256,7 @@
                 "sd_jK1yTPs7foxJ0sF9"
             ]
         ],
+        "__n_excludedFromValidation__": {},
         "generateNext": true,
         "functionName": "sd_ISirC5Fy6p3Du7i8"
     },
@@ -210,7 +269,6 @@
         "name": "",
         "inputs": 1,
         "outputs": 1,
-        "functionName": "sd_jK1yTPs7foxJ0sF9",
         "category": "Middleware",
         "x": 421,
         "y": 212.8125,
@@ -219,6 +277,7 @@
                 "sd_mSMwUAx7kHUdyb5B"
             ]
         ],
+        "__n_excludedFromValidation__": {},
         "generateNext": true
     },
     {
@@ -230,11 +289,11 @@
         "name": "",
         "inputs": 1,
         "outputs": 0,
-        "functionName": "sd_mSMwUAx7kHUdyb5B",
         "category": "Middleware",
         "x": 561,
         "y": 212.8125,
         "wires": [],
+        "__n_excludedFromValidation__": {},
         "generateNext": true
     }
 ]
