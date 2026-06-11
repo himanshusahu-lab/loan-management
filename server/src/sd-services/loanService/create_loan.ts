@@ -504,11 +504,11 @@ export class create_loan {
     );
     try {
       bh.local.finalUpdateData = {
-        interest_rate: bh.local.loanMetrics.interest_rate,
+        interest_rate: bh.local.loanMetrics.interest_rate || null,
 
-        emi: bh.local.loanMetrics.emi,
+        emi: bh.local.loanMetrics.emi || null,
 
-        debt_to_income_ratio: bh.local.loanMetrics.dti_ratio,
+        debt_to_income_ratio: bh.local.loanMetrics.dti_ratio || null,
 
         risk_category: bh.local.loanMetrics.dti_status,
 
@@ -596,7 +596,7 @@ export class create_loan {
 
         message: 'Loan application created successfully',
 
-        data: bh.local.updateFinalResult || bh.local.insertResult,
+        data: bh.local.finalUpdateData || bh.local.updateFinalResult,
       };
       this.tracerService.sendData(spanInst, bh);
       await this.response(bh, parentSpanInst);
