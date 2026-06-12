@@ -591,6 +591,12 @@ export class create_loan {
       parentSpanInst
     );
     try {
+      console.log(
+        'bh.local.updateFinalResult >> ',
+        bh.local.updateFinalResult,
+        bh.local.insertResult
+      );
+
       bh.output = {
         success: true,
 

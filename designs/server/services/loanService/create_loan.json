@@ -37,7 +37,6 @@
             "send": "bh.output"
         },
         "dataModelIsArray": false,
-        "cookies": [],
         "inputs": 1,
         "outputs": 0,
         "erd": "_DM_8pu5l2evu",
@@ -220,7 +219,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "prepareResponse",
-        "script": "bh.output = {\n\n    success: true,\n\n    message: \"Loan application created successfully\",\n\n    data: bh.local.finalUpdateData || bh.local.updateFinalResult\n};",
+        "script": "console.log(\"bh.local.updateFinalResult >> \", bh.local.updateFinalResult, bh.local.insertResult)\n\nbh.output = {\n\n    success: true,\n\n    message: \"Loan application created successfully\",\n\n    data: bh.local.finalUpdateData || bh.local.updateFinalResult\n};",
         "functionName": "prepareResponse",
         "category": "Function",
         "x": 1345,
