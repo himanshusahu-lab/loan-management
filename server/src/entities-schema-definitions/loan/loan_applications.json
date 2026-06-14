@@ -482,6 +482,159 @@
                 "dbColName": "",
                 "constraints": {}
             }
+        },
+        "loan_officer_decision": {
+            "name": "loan_officer_decision",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_ilthyt4ycc",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "loan_officer_remarks": {
+            "name": "loan_officer_remarks",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_y6xtciozv7",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "loan_officer_reviewed_by": {
+            "name": "loan_officer_reviewed_by",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_9t0xv8ype5",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "loan_officer_reviewed_at": {
+            "name": "loan_officer_reviewed_at",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_yqz0u0jh8a",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "credit_manager_decision": {
+            "name": "credit_manager_decision",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_ayedaxtst7",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "credit_manager_remarks": {
+            "name": "credit_manager_remarks",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_i0ssexq21l",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "credit_manager_reviewed_by": {
+            "name": "credit_manager_reviewed_by",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_zstgxy0asl",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "credit_manager_reviewed_at": {
+            "name": "credit_manager_reviewed_at",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_ldu0o200mn",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
+        },
+        "final_interest_rate": {
+            "name": "final_interest_rate",
+            "format": "",
+            "type": "string",
+            "description": "",
+            "default": "",
+            "__n__metadata__": {
+                "id": "_Att_5zs09no87i",
+                "subCategoryType": null,
+                "nullable": false,
+                "dbType": "text",
+                "primary": false,
+                "placeholder": "",
+                "dbColName": "",
+                "constraints": {}
+            }
         }
     },
     "required": [
@@ -511,7 +664,16 @@
         "submitted_at",
         "approved_at",
         "rejected_at",
-        "rejection_reason"
+        "rejection_reason",
+        "loan_officer_decision",
+        "loan_officer_remarks",
+        "loan_officer_reviewed_by",
+        "loan_officer_reviewed_at",
+        "credit_manager_decision",
+        "credit_manager_remarks",
+        "credit_manager_reviewed_by",
+        "credit_manager_reviewed_at",
+        "final_interest_rate"
     ],
     "value": "",
     "__attributeExpansion__": true,

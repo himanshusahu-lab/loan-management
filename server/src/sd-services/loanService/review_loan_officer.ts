@@ -209,10 +209,13 @@ export class review_loan_officer {
       }
       console.log('loan >>>> ', loan);
 
-      if (loan.status !== 'SUBMITTED') {
+      if (
+        loan.status !== 'UNDER_REVIEW' ||
+        loan.review_stage !== 'LOAN_OFFICER_REVIEW'
+      ) {
         throw {
           statusCode: 400,
-          message: 'Loan is not in submitted state',
+          message: 'Loan is not pending Loan Officer review',
         };
       }
       this.tracerService.sendData(spanInst, bh);
@@ -276,9 +279,17 @@ export class review_loan_officer {
     );
     try {
       bh.local.updateData = {
-        status: 'CREDIT_MANAGER_REVIEW',
+        status: 'UNDER_REVIEW',
 
-        remarks: bh.local.body.remarks || 'Verified by Loan Officer',
+        review_stage: 'CREDIT_MANAGER_REVIEW',
+
+        remarks: bh.local.body.remarks,
+
+        loan_officer_decision: 'APPROVED',
+
+        loan_officer_remarks: bh.local.body.remarks,
+
+        loan_officer_reviewed_at: new Date(),
 
         updated_at: new Date(),
       };
@@ -398,9 +409,17 @@ export class review_loan_officer {
       bh.local.updateData = {
         status: 'REJECTED',
 
-        rejection_reason: bh.local.body.remarks || 'Rejected by Loan Officer',
+        review_stage: 'COMPLETED',
 
-        remarks: bh.local.body.remarks || 'Rejected by Loan Officer',
+        rejection_reason: bh.local.body.remarks,
+
+        remarks: bh.local.body.remarks,
+
+        loan_officer_decision: 'REJECTED',
+
+        loan_officer_remarks: bh.local.body.remarks,
+
+        loan_officer_reviewed_at: new Date(),
 
         rejected_at: new Date(),
 

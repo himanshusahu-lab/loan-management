@@ -210,10 +210,13 @@ export class review_credit_manager {
         };
       }
 
-      if (loan.status !== 'CREDIT_MANAGER_REVIEW') {
+      if (
+        loan.status !== 'UNDER_REVIEW' ||
+        loan.review_stage !== 'CREDIT_MANAGER_REVIEW'
+      ) {
         throw {
           statusCode: 400,
-          message: 'Loan is not in credit manager review state',
+          message: 'Loan is not pending Credit Manager review',
         };
       }
       this.tracerService.sendData(spanInst, bh);
@@ -263,7 +266,6 @@ export class review_credit_manager {
           undefined
         )
       ) {
-        bh = await this.clarification(bh, parentSpanInst);
       }
       this.tracerService.sendData(spanInst, bh);
 
@@ -285,17 +287,29 @@ export class review_credit_manager {
       parentSpanInst
     );
     try {
+      let loan = bh.local.loanData;
       bh.local.updateData = {
         status: 'APPROVED',
 
-        remarks: bh.local.body.remarks || 'Approved by Credit Manager',
+        review_stage: 'COMPLETED',
 
-        approved_at: new Date(),
+        credit_manager_decision: 'APPROVED',
 
-        updated_at: new Date(),
+        credit_manager_remarks: bh.local.body.remarks,
+
+        credit_manager_reviewed_at: new Date().toISOString(),
+
+        approved_at: new Date().toISOString(),
+
+        interest_rate: bh.local.body.interest_rate ?? loan.interest_rate,
+
+        final_interest_rate: bh.local.body.interest_rate || loan.interest_rate,
+
+        updated_at: new Date().toISOString(),
       };
 
-      console.log('UPDATE DATA >>>>', bh.local.updateData);
+      console.log('APPROVE DATA', bh.local.updateData);
+
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_lTXjdFHU0QsYUfxl(bh, parentSpanInst);
       //appendnew_next_prepareApproveData
@@ -375,6 +389,10 @@ export class review_credit_manager {
         message: 'Credit Manager review completed successfully',
 
         status: bh.local.updateData.status,
+
+        review_stage: bh.local.updateData.review_stage,
+
+        application_id: bh.local.loanData.application_id,
       };
       this.tracerService.sendData(spanInst, bh);
       await this.sd_xqKgRrMBsNJkDzoO(bh, parentSpanInst);
@@ -410,16 +428,22 @@ export class review_credit_manager {
       bh.local.updateData = {
         status: 'REJECTED',
 
-        rejection_reason: bh.local.body.remarks || 'Rejected by Credit Manager',
+        review_stage: 'COMPLETED',
 
-        remarks: bh.local.body.remarks || 'Rejected by Credit Manager',
+        credit_manager_decision: 'REJECTED',
 
-        rejected_at: new Date(),
+        credit_manager_remarks: bh.local.body.remarks,
 
-        updated_at: new Date(),
+        credit_manager_reviewed_at: new Date().toISOString(),
+
+        rejection_reason: bh.local.body.remarks,
+
+        rejected_at: new Date().toISOString(),
+
+        updated_at: new Date().toISOString(),
       };
 
-      console.log('UPDATE DATA >>>>', bh.local.updateData);
+      console.log('REJECT DATA', bh.local.updateData);
       this.tracerService.sendData(spanInst, bh);
       bh = await this.sd_lTXjdFHU0QsYUfxl(bh, parentSpanInst);
       //appendnew_next_prepareRejectData
@@ -431,36 +455,6 @@ export class review_credit_manager {
         'sd_7kSL2XyGpOtILjky',
         spanInst,
         'prepareRejectData'
-      );
-    }
-  }
-
-  async clarification(bh, parentSpanInst) {
-    const spanInst = this.tracerService.createSpan(
-      'clarification',
-      parentSpanInst
-    );
-    try {
-      bh.local.updateData = {
-        status: 'CLARIFICATION_REQUIRED',
-
-        remarks: bh.local.body.remarks || 'Clarification requested',
-
-        updated_at: new Date(),
-      };
-
-      console.log('UPDATE DATA >>>>', bh.local.updateData);
-      this.tracerService.sendData(spanInst, bh);
-      bh = await this.sd_lTXjdFHU0QsYUfxl(bh, parentSpanInst);
-      //appendnew_next_clarification
-      return bh;
-    } catch (e) {
-      return await this.errorHandler(
-        bh,
-        e,
-        'sd_yfANL8t09x849gV2',
-        spanInst,
-        'clarification'
       );
     }
   }

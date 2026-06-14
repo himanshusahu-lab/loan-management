@@ -150,4 +150,67 @@ export class loan_applications {
     primary: false,
   })
   rejection_reason: string;
+  @Column({
+    name: 'loan_officer_decision',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  loan_officer_decision: string;
+  @Column({
+    name: 'loan_officer_remarks',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  loan_officer_remarks: string;
+  @Column({
+    name: 'loan_officer_reviewed_by',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  loan_officer_reviewed_by: string;
+  @Column({
+    name: 'loan_officer_reviewed_at',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  loan_officer_reviewed_at: string;
+  @Column({
+    name: 'credit_manager_decision',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  credit_manager_decision: string;
+  @Column({
+    name: 'credit_manager_remarks',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  credit_manager_remarks: string;
+  @Column({
+    name: 'credit_manager_reviewed_by',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  credit_manager_reviewed_by: string;
+  @Column({
+    name: 'credit_manager_reviewed_at',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  credit_manager_reviewed_at: string;
+  @Column({
+    name: 'final_interest_rate',
+    nullable: false,
+    type: 'text',
+    primary: false,
+  })
+  final_interest_rate: string;
 }

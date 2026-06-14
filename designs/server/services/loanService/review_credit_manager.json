@@ -250,7 +250,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "validateLoanStatus",
-        "script": "let loan =\n    bh.local.loanData;\n\n\nconsole.log(\n    \"loan >>>>\",\n    loan\n);\nif (\n    Array.isArray(loan)\n) {\n\n    loan = loan[0];\n}\n\n\n\nif (!loan) {\n\n    throw {\n        statusCode: 404,\n        message:\n            \"Loan not found\"\n    };\n}\n\n\nif (\n    loan.status !==\n    \"CREDIT_MANAGER_REVIEW\"\n) {\n\n    throw {\n        statusCode: 400,\n        message:\n            \"Loan is not in credit manager review state\"\n    };\n}",
+        "script": "let loan =\n    bh.local.loanData;\n\n\nconsole.log(\n    \"loan >>>>\",\n    loan\n);\nif (\n    Array.isArray(loan)\n) {\n\n    loan = loan[0];\n}\n\n\n\nif (!loan) {\n\n    throw {\n        statusCode: 404,\n        message:\n            \"Loan not found\"\n    };\n}\n\n\nif (\n    loan.status !== \"UNDER_REVIEW\" ||\n    loan.review_stage !==\n        \"CREDIT_MANAGER_REVIEW\"\n) {\n\n    throw {\n        statusCode: 400,\n        message:\n            \"Loan is not pending Credit Manager review\"\n    };\n}",
         "functionName": "validateLoanStatus",
         "category": "Function",
         "x": 470,
@@ -309,9 +309,7 @@
             [
                 "sd_7kSL2XyGpOtILjky"
             ],
-            [
-                "sd_yfANL8t09x849gV2"
-            ]
+            []
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,
@@ -325,7 +323,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "prepareApproveData",
-        "script": "bh.local.updateData = {\n\n    status:\n        \"APPROVED\",\n\n    remarks:\n        bh.local.body.remarks ||\n\n        \"Approved by Credit Manager\",\n\n    approved_at:\n        new Date(),\n\n    updated_at:\n        new Date()\n};\n\n\nconsole.log(\n    \"UPDATE DATA >>>>\",\n    bh.local.updateData\n);",
+        "script": "let loan =\n    bh.local.loanData;\nbh.local.updateData = {\n\n    status: \"APPROVED\",\n\n    review_stage:\n        \"COMPLETED\",\n\n    credit_manager_decision:\n        \"APPROVED\",\n\n    credit_manager_remarks:\n        bh.local.body.remarks,\n\n    credit_manager_reviewed_at:\n        new Date().toISOString(),\n\n    approved_at:\n        new Date().toISOString(),\n\n    interest_rate:\n        bh.local.body.interest_rate ??\n        loan.interest_rate,\n    \n    final_interest_rate:\n      bh.local.body.interest_rate ||\n      loan.interest_rate,\n\n    updated_at:\n        new Date().toISOString()\n};\n\n\nconsole.log(\n    \"APPROVE DATA\",\n    bh.local.updateData\n);\n",
         "functionName": "prepareApproveData",
         "category": "Function",
         "x": 725,
@@ -347,11 +345,11 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "prepareRejectData",
-        "script": "bh.local.updateData = {\n\n    status:\n        \"REJECTED\",\n\n    rejection_reason:\n        bh.local.body.remarks ||\n\n        \"Rejected by Credit Manager\",\n\n    remarks:\n        bh.local.body.remarks ||\n\n        \"Rejected by Credit Manager\",\n\n    rejected_at:\n        new Date(),\n\n    updated_at:\n        new Date()\n};\n\n\nconsole.log(\n    \"UPDATE DATA >>>>\",\n    bh.local.updateData\n);",
+        "script": "bh.local.updateData = {\n\n    status: \"REJECTED\",\n\n    review_stage:\n        \"COMPLETED\",\n\n    credit_manager_decision:\n        \"REJECTED\",\n\n    credit_manager_remarks:\n        bh.local.body.remarks,\n\n    credit_manager_reviewed_at:\n        new Date().toISOString(),\n\n    rejection_reason:\n        bh.local.body.remarks,\n\n    rejected_at:\n        new Date().toISOString(),\n\n    updated_at:\n        new Date().toISOString()\n};\n\n\nconsole.log(\n    \"REJECT DATA\",\n    bh.local.updateData\n);",
         "functionName": "prepareRejectData",
         "category": "Function",
         "x": 725,
-        "y": 260,
+        "y": 280,
         "wires": [
             [
                 "sd_lTXjdFHU0QsYUfxl"
@@ -369,7 +367,7 @@
         "viewType": "common",
         "nodeType": "flow",
         "name": "formatResponse",
-        "script": "bh.output = {\n\n    success: true,\n\n    message:\n        \"Credit Manager review completed successfully\",\n\n    status:\n        bh.local.updateData.status\n};",
+        "script": "bh.output = {\n\n    success: true,\n\n    message:\n        \"Credit Manager review completed successfully\",\n\n    status:\n        bh.local.updateData.status,\n\n    review_stage:\n        bh.local.updateData.review_stage,\n\n    application_id:\n        bh.local.loanData.application_id\n};",
         "functionName": "formatResponse",
         "category": "Function",
         "x": 1005,
@@ -514,28 +512,6 @@
         "wires": [
             [
                 "sd_sHu6YvRfhaVYeby6"
-            ]
-        ],
-        "__n_excludedFromValidation__": {},
-        "generateNext": false,
-        "serviceName": "review_credit_manager",
-        "generated": true
-    },
-    {
-        "id": "sd_yfANL8t09x849gV2",
-        "type": "Script",
-        "z": "SSD_SERVICE_ID_sd_YYpEzCx9fwcVc5u8",
-        "viewType": "common",
-        "nodeType": "flow",
-        "name": "Clarification",
-        "script": "bh.local.updateData = {\n\n    status:\n        \"CLARIFICATION_REQUIRED\",\n\n    remarks:\n        bh.local.body.remarks ||\n\n        \"Clarification requested\",\n\n    updated_at:\n        new Date()\n};\n\n\nconsole.log(\n    \"UPDATE DATA >>>>\",\n    bh.local.updateData\n);",
-        "functionName": "clarification",
-        "category": "Function",
-        "x": 725,
-        "y": 380,
-        "wires": [
-            [
-                "sd_lTXjdFHU0QsYUfxl"
             ]
         ],
         "__n_excludedFromValidation__": {},

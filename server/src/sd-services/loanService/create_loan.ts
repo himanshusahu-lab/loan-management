@@ -159,9 +159,10 @@ export class create_loan {
       }
 
       if (errors.length > 0) {
-        let err:any = new Error(errors.join(', '));
-        err.statusCode = 400;
-        throw err;
+        throw {
+          statusCode: 400,
+          message: errors.join(', '),
+        };
       }
 
       bh.local.loanRequest = data;
@@ -408,30 +409,10 @@ export class create_loan {
 
       if (bh.local.loanRequest.status === 'SUBMITTED') {
         bh.local.submittedAt = new Date().toISOString();
-      }
 
-      switch (bh.local.loanDecision) {
-        case 'AUTO_APPROVE':
-          assignedRole = null;
-          reviewStage = null;
+        assignedRole = 'LOAN_OFFICER';
 
-          break;
-
-        case 'LOAN_OFFICER_REVIEW':
-          assignedRole = 'LOAN_OFFICER';
-          reviewStage = 'LOAN_OFFICER_REVIEW';
-
-          break;
-
-        case 'CREDIT_MANAGER_REVIEW':
-          assignedRole = 'CREDIT_MANAGER';
-          reviewStage = 'CREDIT_MANAGER_REVIEW';
-
-          break;
-
-        default:
-          assignedRole = 'CREDIT_MANAGER';
-          reviewStage = 'CREDIT_MANAGER_REVIEW';
+        reviewStage = 'LOAN_OFFICER_REVIEW';
       }
 
       bh.local.assignedRole = assignedRole;
@@ -504,39 +485,67 @@ export class create_loan {
     );
     try {
       bh.local.finalUpdateData = {
-        interest_rate: bh.local.loanMetrics.interest_rate || null,
+        interest_rate: bh.local.loanMetrics.interest_rate,
 
-        emi: bh.local.loanMetrics.emi || null,
+        emi: bh.local.loanMetrics.emi,
 
-        debt_to_income_ratio: bh.local.loanMetrics.dti_ratio || null,
+        debt_to_income_ratio: bh.local.loanMetrics.dti_ratio,
 
         risk_category: bh.local.loanMetrics.dti_status,
 
         review_stage: bh.local.reviewStage,
 
+        status:
+          bh.local.loanRequest.status === 'DRAFT' ? 'DRAFT' : 'UNDER_REVIEW',
+
         remarks: null,
+
         submitted_at: bh.local.submittedAt || null,
 
-        status: bh.local.loanStatus,
-        id: bh.local.insertResult?.id,
-        dob: bh.local.insertResult.dob,
-        gender: bh.local.insertResult.gender,
-        mobile: bh.local.insertResult.mobile,
-        email: bh.local.insertResult.email,
-        address: bh.local.insertResult.address,
-        employment_type: bh.local.insertResult.employment_type,
-        employer_name: bh.local.insertResult.employer_name,
-        monthly_income: bh.local.insertResult.monthly_income,
-        loan_type: bh.local.insertResult.loan_type,
-        loan_amount: bh.local.insertResult.loan_amount,
-        loan_tenure: bh.local.insertResult.loan_tenure,
-        credit_score: bh.local.insertResult.credit_score,
-        purpose_of_loan: bh.local.insertResult.purpose_of_loan,
-        // status:bh.local.insertResult.status,
-        application_id: bh.local.insertResult.application_id,
-        applicant_name: bh.local.insertResult.applicant_name,
-      };
+        loan_officer_remarks: null,
+        loan_officer_decision: null,
+        loan_officer_reviewed_at: null,
 
+        credit_manager_remarks: null,
+        credit_manager_decision: null,
+        credit_manager_reviewed_at: null,
+
+        approved_at: null,
+        rejected_at: null,
+        rejection_reason: null,
+
+        id: bh.local.insertResult.id,
+
+        application_id: bh.local.insertResult.application_id,
+
+        applicant_name: bh.local.insertResult.applicant_name,
+
+        dob: bh.local.insertResult.dob,
+
+        gender: bh.local.insertResult.gender,
+
+        mobile: bh.local.insertResult.mobile,
+
+        email: bh.local.insertResult.email,
+
+        address: bh.local.insertResult.address,
+
+        employment_type: bh.local.insertResult.employment_type,
+
+        employer_name: bh.local.insertResult.employer_name,
+
+        monthly_income: bh.local.insertResult.monthly_income,
+
+        loan_type: bh.local.insertResult.loan_type,
+
+        loan_amount: bh.local.insertResult.loan_amount,
+
+        loan_tenure: bh.local.insertResult.loan_tenure,
+
+        credit_score: bh.local.insertResult.credit_score,
+
+        purpose_of_loan: bh.local.insertResult.purpose_of_loan,
+      };
       console.log(
         'Final Update Data:',
         bh.local.insertResult,
