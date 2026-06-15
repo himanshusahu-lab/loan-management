@@ -278,26 +278,20 @@
         "rules": [
             {
                 "t": "eq",
-                "v": "APPROVE",
+                "v": "FORWARD",
                 "vt": "str",
-                "gv": "\"APPROVE\""
+                "gv": "\"FORWARD\""
             },
             {
                 "t": "eq",
                 "v": "REJECT",
                 "vt": "str",
                 "gv": "\"REJECT\""
-            },
-            {
-                "t": "eq",
-                "v": "REQUEST_CLARIFICATION",
-                "vt": "str",
-                "gv": "\"REQUEST_CLARIFICATION\""
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 3,
+        "outputs": 2,
         "functionName": "reviewDecision",
         "category": "Function",
         "x": 585,
@@ -308,8 +302,7 @@
             ],
             [
                 "sd_7kSL2XyGpOtILjky"
-            ],
-            []
+            ]
         ],
         "__n_excludedFromValidation__": {},
         "generateNext": false,

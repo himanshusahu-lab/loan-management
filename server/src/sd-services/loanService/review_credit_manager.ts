@@ -243,7 +243,7 @@ export class review_credit_manager {
       if (
         this.sdService.operators['eq'](
           bh.local.body.action,
-          'APPROVE',
+          'FORWARD',
           undefined,
           undefined
         )
@@ -258,14 +258,6 @@ export class review_credit_manager {
         )
       ) {
         bh = await this.prepareRejectData(bh, parentSpanInst);
-      } else if (
-        this.sdService.operators['eq'](
-          bh.local.body.action,
-          'REQUEST_CLARIFICATION',
-          undefined,
-          undefined
-        )
-      ) {
       }
       this.tracerService.sendData(spanInst, bh);
 
